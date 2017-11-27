@@ -6,7 +6,7 @@
 #include< string >
 
 #include "date.hpp"
-#include "floweringhouseplant.h"
+#include "floweringhouseplant.hpp"
 
 #include "messages.hpp"
 

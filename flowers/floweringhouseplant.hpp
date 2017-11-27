@@ -1,7 +1,7 @@
 #ifndef FLOWERINGHOUEPLANT_H
 #define FLOWERINGHOUEPLANT_H
 
-#include "houseplant.h"
+#include "houseplant.hpp"
 #include "messages.hpp"
 
 class FloweringHouseplant : public HousePlant

@@ -1,4 +1,4 @@
-#include "houseplant.h"
+#include "houseplant.hpp"
 
 HousePlant::HousePlant(const std::string & _plantName, int _irrigationPeriod , int _plantAge )
 {

@@ -1,4 +1,4 @@
-#include "room.h"
+#include "room.hpp"
 
 void Room::addFloweringPlant(std::string const & _plantName, int _plantAge, int _irregationPeriod, int _needdedSuccesfulFlowerings, int _floweringTime)
 {

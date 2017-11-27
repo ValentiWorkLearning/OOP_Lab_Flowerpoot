@@ -1,4 +1,4 @@
-#include "floweringhouseplant.h"
+#include "floweringhouseplant.hpp"
 
 FloweringHouseplant::FloweringHouseplant(std::string const& _name,int _plantAge, int _irregationPeriod,  int _needdedSuccesfulFlowerings, int _floweringTime )
 	:

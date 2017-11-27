@@ -1,6 +1,6 @@
 #include<iostream>
-#include "floweringhouseplant.h"
-#include "room.h"
+#include "floweringhouseplant.hpp"
+#include "room.hpp"
 
 
 
