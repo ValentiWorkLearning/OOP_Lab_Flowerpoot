@@ -19,6 +19,7 @@ FloweringHouseplant::FloweringHouseplant(
 		
 	m_currentWaterings = 0;
 	m_flowerStatus = 0;
+	m_daysPassed = 0;
 }
 
 void FloweringHouseplant::makeWatering()
@@ -27,7 +28,9 @@ void FloweringHouseplant::makeWatering()
 	std::cout << "Waterring..." << std::endl;
 }
 
-int FloweringHouseplant::getWateringAmount()
+
+//Getters methods 
+int FloweringHouseplant::getWateringPeriod()
 {
 	return HousePlant::getPlantWateringPeriod() ;
 }
@@ -47,6 +50,24 @@ int FloweringHouseplant::getFlowerStatus()
 	return m_flowerStatus;
 }
 
+int FloweringHouseplant::getNeededSuccesfulWaterings()
+{
+	return m_needdedSuccesfulFlowerings;
+}
+
+int FloweringHouseplant::getPassedDays()
+{
+	return m_daysPassed;
+}
+
+void FloweringHouseplant::dayPassed()
+{
+	m_daysPassed++;
+}
+
+
+
+//Reset methods
 void FloweringHouseplant::resetWaterings()
 {
 	m_currentWaterings = 0;
@@ -55,4 +76,29 @@ void FloweringHouseplant::resetWaterings()
 void FloweringHouseplant::resetFloweringStatus()
 {
 	m_flowerStatus = 0;
+}
+
+void FloweringHouseplant::logic_makeWatering()
+{
+	if (getFlowerStatus()) 
+	{
+		if (getWateringPeriod() == getPassedDays()) //If water period OK - add current waterings
+		{
+			m_currentWaterings++;
+		}
+		else 
+		{
+			if (getNeededSuccesfulWaterings() - getPassedDays() == 1) //If no good - nothing do
+			{
+				return;
+			}
+			else	//If wrong..
+			{
+				if (m_currentWaterings) m_currentWaterings--;
+			}
+		}
+	}
+	else 
+	{
+	}
 }

@@ -22,7 +22,7 @@ public:
 
 	void makeWatering(); //Watering the plant
 
-	int getWateringAmount();//Get amount of watering plant 
+	int getWateringPeriod();//Get period of watering plant 
 
 	int getFloweringTime(); //Get flowering time
 
@@ -30,11 +30,18 @@ public:
 
 	int getFlowerStatus(); // Get flower status  - 0 not flowering, 1 - flowering, 2 - ebd of flowering
 
+	int getNeededSuccesfulWaterings(); //Get needed amount of succesful flowerings 
+
+	int getPassedDays() override;
+
+	void dayPassed()override ;
+
 protected:
+	
 	void resetWaterings();
 	void resetFloweringStatus();
 
-
+	void logic_makeWatering();
 
 private:
 
@@ -45,6 +52,8 @@ private:
 	const int m_needdedSuccesfulFlowerings; // Needed value of succesful waterings
 
 	int m_flowerStatus; // Current flower status
+
+	int m_daysPassed;
 	
 };
 #endif

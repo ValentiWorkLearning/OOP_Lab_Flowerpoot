@@ -18,7 +18,7 @@ public:
 
 	int getPlantAge() const ; //Get plant age
 
-	int getPlantWateringAmount() const; //Get plant watering period
+	int getPlantWateringPeriod() const; //Get plant watering period
 
 	const Date & getDateOfLastWatering() const; //Get last date of watering
 
