@@ -158,6 +158,27 @@ bool Date::operator >= (Date d) const
 	return (d < *this) || (*this == d);
 }
 
+void Date::addDay(int _nDay)
+{
+	static const int s_daysInMonth[] =
+	{ 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 };
+
+	m_day += _nDay;
+
+	if (m_day > s_daysInMonth[m_month - 1])
+	{
+		m_day -= s_daysInMonth[m_month - 1];
+		m_month++;
+	}
+
+	if (m_month > 12)
+	{
+		m_month = 1;
+		m_year++;
+	}
+	
+}
+
 
 /*****************************************************************************/
 

@@ -4,49 +4,59 @@
 #include <string>
 #include "date.hpp"
 #include "messages.hpp"
+
 class HousePlant 
 {
 
 public:
-
 	
-	const std::string  & getPlantName();
-
-	int getPlantAge() const ;
-
-	int getPlantIrrigationPeriod() const;
-
-	virtual void makeIrrigation() {};
-	
+	HousePlant(const HousePlant &) = delete;
+	HousePlant & operator = (const HousePlant &) = delete;
 	virtual ~HousePlant() = default;
+
+	const std::string  & getPlantName(); //Get plant name
+
+	int getPlantAge() const ; //Get plant age
+
+	int getPlantWateringPeriod() const; //Get plant watering period
+
+	const Date & getDateOfLastWatering() const; //Get last date of watering
+
+	void setFirstWatering(const Date &_date); // Set date of fist watering plant
+
+	virtual void makeWatering() {}; // Virtual method - make irigation of plant
+	
+	virtual void makeFirstWatering(const Date&) {}; //Virtual mehod - make first watering in non-init plant
+
+	virtual void dayPassed() {}; // Update plant 
+
+	virtual int getPassedDays() { return 0;  }; // Return a num, of passed days
 
 private:
 
 	std::string m_plantName;
-	int m_plantAge;
-	int m_irrigationPeriod;
-
-	Date m_dateOfLastIrrigation;
 	
-	virtual void newDayIsComing() {};
+	int m_plantAge;
+
+	int m_wateringPeriod;//Period of watering plant
+
+	Date m_dateOfLastWatering;  //Date of last watering
+	
+	bool m_firstWatering; // Is first watering?
 
 protected: 
 
-	HousePlant(const  std::string  & _plantName, int _irrigationPeriod , int _plantAge );
+	HousePlant
+	(
+		const  std::string  & _plantName, 
+		int _wateringPeriod , 
+		int _plantAge 
+	);
+
+	void incrementWateringPeriod();
+	void addDay(int _nDays);
 };
 
-inline const std::string & HousePlant::getPlantName()
-{
-	return m_plantName;
-}
 
-inline int  HousePlant::getPlantAge()const 
-{
-	return m_plantAge;
-}
 
-inline int HousePlant::getPlantIrrigationPeriod () const
-{
-	return m_irrigationPeriod;
-}
 #endif

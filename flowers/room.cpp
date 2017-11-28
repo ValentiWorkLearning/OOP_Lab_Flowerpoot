@@ -13,7 +13,7 @@ int Room::getFlowerAge(std::string const & _plantName)
 
 void Room::pourOnFlower(std::string const & _plantName)
 {
-	findPlant(_plantName)->makeIrrigation();
+	findPlant(_plantName)->makeWatering();
 }
 
 HousePlant * Room::findPlant(std::string const & _plantName)

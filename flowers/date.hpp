@@ -35,7 +35,7 @@ public:
 	bool operator <= (Date d) const;
 	bool operator > (Date d) const;
 	bool operator >= (Date d) const;
-
+	void addDay(int _nDay);
 	/*-----------------------------------------------------------------*/
 
 private:
