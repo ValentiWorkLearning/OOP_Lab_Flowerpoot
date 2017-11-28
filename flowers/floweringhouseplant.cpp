@@ -28,7 +28,7 @@ void FloweringHouseplant::makeWatering()
 	std::cout << "Waterring..." << std::endl;
 }
 
-int FloweringHouseplant::getWateringPeriod()
+int FloweringHouseplant::getWateringAmount()
 {
 	return HousePlant::getPlantWateringPeriod() ;
 }
@@ -46,4 +46,14 @@ int FloweringHouseplant::getCurrentWaterings()
 int FloweringHouseplant::getFlowerStatus()
 {
 	return m_flowerStatus;
+}
+
+void FloweringHouseplant::resetWaterings()
+{
+	m_currentWaterings = 0;
+}
+
+void FloweringHouseplant::resetFloweringStatus()
+{
+	m_flowerStatus = 0;
 }

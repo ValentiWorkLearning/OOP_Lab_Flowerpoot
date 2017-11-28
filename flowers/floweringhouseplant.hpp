@@ -22,7 +22,7 @@ public:
 
 	void makeWatering(); //Watering the plant
 
-	int getWateringPeriod();//Get period of watering plant 
+	int getWateringAmount();//Get amount of watering plant 
 
 	int getFloweringTime(); //Get flowering time
 
@@ -30,17 +30,21 @@ public:
 
 	int getFlowerStatus(); // Get flower status  - 0 not flowering, 1 - flowering, 2 - ebd of flowering
 
+protected:
+	void resetWaterings();
+	void resetFloweringStatus();
+
 
 
 private:
 
-	int m_floweringTime;
+	const int m_floweringTime; //Flowering time of plant
 
-	int m_currentWaterings;
+	int m_currentWaterings; // Current value of succesful waterings 
 	
-	int m_needdedSuccesfulFlowerings;
+	const int m_needdedSuccesfulFlowerings; // Needed value of succesful waterings
 
-	int m_flowerStatus;
+	int m_flowerStatus; // Current flower status
 	
 };
 #endif
