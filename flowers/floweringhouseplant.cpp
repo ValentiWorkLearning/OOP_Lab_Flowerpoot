@@ -7,19 +7,18 @@ FloweringHouseplant::FloweringHouseplant(
 	int _needdedSuccesfulWaterings, 
 	int _floweringTime )
 	:
-	HousePlant(_name, _irregationPeriod ,_plantAge)
+	HousePlant(_name, _irregationPeriod ,_plantAge),
+	m_needdedSuccesfulFlowerings(_needdedSuccesfulWaterings),
+	m_floweringTime(_floweringTime)
 {
 	if (_needdedSuccesfulWaterings <= 0)
 		throw std::logic_error(Messages::IncorrectValueSuccesfulWaterings);
 	
 	if (_floweringTime <= 0)
 		throw std::logic_error(Messages::IncorrectFloweringTime);
-
-	m_floweringTime = _floweringTime;
-	m_needdedSuccesfulFlowerings = _needdedSuccesfulWaterings;
+		
 	m_currentWaterings = 0;
-
-
+	m_flowerStatus = 0;
 }
 
 void FloweringHouseplant::makeWatering()
