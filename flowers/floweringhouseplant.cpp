@@ -18,14 +18,16 @@ FloweringHouseplant::FloweringHouseplant(
 		throw std::logic_error(Messages::IncorrectFloweringTime);
 		
 	m_currentWaterings = 0;
-	m_flowerStatus = 0;
+	m_flowerStatus = FlowerState::Growing;
 	m_daysPassed = 0;
+	m_daysInFloweringSchedule = 0;
 }
 
 void FloweringHouseplant::makeWatering()
 {
 	
 	std::cout << "Waterring..." << std::endl;
+	logic_makeWatering();
 }
 
 
@@ -45,7 +47,7 @@ int FloweringHouseplant::getCurrentWaterings()
 	return m_currentWaterings;
 }
 
-int FloweringHouseplant::getFlowerStatus()
+FloweringHouseplant::FlowerState FloweringHouseplant::getFlowerStatus()
 {
 	return m_flowerStatus;
 }
@@ -75,30 +77,61 @@ void FloweringHouseplant::resetWaterings()
 
 void FloweringHouseplant::resetFloweringStatus()
 {
-	m_flowerStatus = 0;
+	m_flowerStatus = FlowerState::Growing;
 }
 
 void FloweringHouseplant::logic_makeWatering()
 {
-	if (getFlowerStatus()) 
+	
+	switch (getFlowerStatus())
 	{
-		if (getWateringPeriod() == getPassedDays()) //If water period OK - add current waterings
+	case FlowerState::Growing:
+		if (getWateringPeriod() == getPassedDays()) 
 		{
+			m_daysPassed = 0;
 			m_currentWaterings++;
+
+			if (m_currentWaterings == getNeededSuccesfulWaterings()) 
+			{
+				m_flowerStatus = FlowerState::Flowering;
+				m_currentWaterings = 0;
+			}
+			break;
+		}
+		if (std::abs((getWateringPeriod() - getPassedDays()) == 1)) 
+		{
+			return;
 		}
 		else 
 		{
-			if (getNeededSuccesfulWaterings() - getPassedDays() == 1) //If no good - nothing do
+			if (m_currentWaterings)m_currentWaterings--;
+		}
+		break;
+
+	case FlowerState::Flowering:
+		if (getWateringPeriod() == getPassedDays()) 
+		{
+			std::cout << "Great Job.. In Flowering process..." << getPlantName() << std::endl;
+			m_daysInFloweringSchedule++;
+			m_daysPassed = 0;
+			if (m_daysInFloweringSchedule == getFloweringTime()) 
 			{
-				return;
-			}
-			else	//If wrong..
-			{
-				if (m_currentWaterings) m_currentWaterings--;
+
+				m_flowerStatus = FlowerState::EndFlowering;
+				break;
 			}
 		}
-	}
-	else 
+	break;
+	
+	case FlowerState::EndFlowering: 
 	{
+		std::cout << "Congratulation! Your plant name:" << getPlantName() << " has succesfully completed the flowering";
+		incrementWateringPeriod(2);
+		m_daysInFloweringSchedule = 0;
+		m_flowerStatus = FlowerState::Growing;
+
+	}
+	default:
+		break;
 	}
 }

@@ -18,6 +18,8 @@ public:
 	);
 
 
+	enum class FlowerState { Growing, Flowering, EndFlowering };
+
 	virtual ~FloweringHouseplant() = default;
 
 	void makeWatering(); //Watering the plant
@@ -28,7 +30,7 @@ public:
 
 	int getCurrentWaterings(); // Get current waterings 
 
-	int getFlowerStatus(); // Get flower status  - 0 not flowering, 1 - flowering, 2 - ebd of flowering
+	FlowerState getFlowerStatus(); // Get flower status  - 0 not flowering, 1 - flowering, 2 - ebd of flowering
 
 	int getNeededSuccesfulWaterings(); //Get needed amount of succesful flowerings 
 
@@ -43,17 +45,23 @@ protected:
 
 	void logic_makeWatering();
 
+	
 private:
 
 	const int m_floweringTime; //Flowering time of plant
-
-	int m_currentWaterings; // Current value of succesful waterings 
 	
 	const int m_needdedSuccesfulFlowerings; // Needed value of succesful waterings
 
-	int m_flowerStatus; // Current flower status
+	int m_currentWaterings; // Current value of succesful waterings 
 
 	int m_daysPassed;
 	
+	int m_daysInFloweringSchedule; 
+	
+	FlowerState m_flowerStatus; // Current flower status
+
+	
+	
 };
+
 #endif

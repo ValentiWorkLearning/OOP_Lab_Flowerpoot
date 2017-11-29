@@ -24,7 +24,7 @@ public:
 
 	void setFirstWatering(const Date &_date); // Set date of fist watering plant
 
-	virtual void makeWatering() {}; // Virtual method - make irigation of plant
+	virtual void makeWatering() {}; // Virtual method - make watering of plant
 	
 	virtual void makeFirstWatering(const Date&) {}; //Virtual mehod - make first watering in non-init plant
 
@@ -50,10 +50,9 @@ protected:
 	(
 		const  std::string  & _plantName, 
 		int _wateringPeriod , 
-		int _plantAge 
-	);
+		int _plantAge );
 
-	void incrementWateringPeriod();
+	void incrementWateringPeriod( int _inc);
 	void addDay(int _nDays);
 };
 

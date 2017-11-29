@@ -27,9 +27,9 @@ HousePlant::HousePlant
 }
 
 //Increment methods 
-void HousePlant::incrementWateringPeriod()
+void HousePlant::incrementWateringPeriod( int _inc)
 {
-	m_wateringPeriod++;
+	m_wateringPeriod+=_inc;
 }
 
 void HousePlant::addDay(int _nDays)
