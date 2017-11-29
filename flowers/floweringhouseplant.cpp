@@ -25,8 +25,7 @@ FloweringHouseplant::FloweringHouseplant(
 
 void FloweringHouseplant::makeWatering()
 {
-	
-	std::cout << "Waterring..." << std::endl;
+
 	logic_makeWatering();
 }
 
@@ -86,6 +85,7 @@ void FloweringHouseplant::logic_makeWatering()
 	switch (getFlowerStatus())
 	{
 	case FlowerState::Growing:
+	std::cout << "Waterring..." << std::endl;
 		if (getWateringPeriod() == getPassedDays()) 
 		{
 			m_daysPassed = 0;
@@ -125,7 +125,7 @@ void FloweringHouseplant::logic_makeWatering()
 	
 	case FlowerState::EndFlowering: 
 	{
-		std::cout << "Congratulation! Your plant name:" << getPlantName() << " has succesfully completed the flowering";
+		std::cout << "Congratulation! Your plant name:" << getPlantName() << " has succesfully completed the flowering"<<std::endl;
 		incrementWateringPeriod(2);
 		m_daysInFloweringSchedule = 0;
 		m_flowerStatus = FlowerState::Growing;

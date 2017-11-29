@@ -22,7 +22,9 @@ int main()
 	FloweringHouseplant kikus("Kikus", 10, 2, 2, 3);
 	kikus.dayPassed();
 	std::cout << kikus.getPlantAge() << std::endl;
-	std::cout << kikus.getPassedDays() << std::endl;
+	
+	std::cout << "New plant: " << kikus.getPlantName() << " with age: " << kikus.getPlantAge() << " ,flowering time: "
+		<< kikus.getFloweringTime() << " and " << kikus.getNeededSuccesfulWaterings() << " succesful waterings" << std::endl;
 
 	kikus.setFirstWatering(data); 
 	
