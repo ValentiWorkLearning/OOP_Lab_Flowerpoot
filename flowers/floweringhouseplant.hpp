@@ -46,7 +46,7 @@ protected:
 	void resetFloweringStatus();
 
 	void logic_makeWatering();
-
+	void logic_endOfFlowering();
 	
 private:
 
