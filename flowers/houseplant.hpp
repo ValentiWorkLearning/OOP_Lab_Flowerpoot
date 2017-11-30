@@ -20,6 +20,8 @@ public:
 
 	int getPlantWateringPeriod() const; //Get plant watering period
 
+	void resetPassedDays();
+
 	const Date & getDateOfLastWatering() const; //Get last date of watering
 
 	virtual void makeWatering() {}; // Virtual method - make watering of plant
@@ -37,9 +39,7 @@ private:
 	int m_plantAge;
 
 	int m_wateringPeriod;//Period of watering plant
-
 	int m_daysPassed; // Num of passed days
-
 	bool m_firstWatering; // Is first watering?
 	Date m_dateOfLastWatering;  //Date of last watering
 

@@ -22,6 +22,14 @@ FloweringHouseplant::FloweringHouseplant(
 	m_daysInFloweringSchedule = 0;
 }
 
+void FloweringHouseplant::makeWatering()
+{
+	logic_makeWatering();
+	logic_endOfFlowering();
+	addDay(getPassedDays());
+	resetPassedDays();
+}
+
 //Getters methods 
 int FloweringHouseplant::getWateringPeriod()
 {
@@ -110,80 +118,43 @@ void FloweringHouseplant::logic_makeWatering()
 		{
 			std::cout << "Great Job.. In Flowering process..." << getPlantName() << std::endl;
 			
+			m_daysInFloweringSchedule++;
+
 			if (m_daysInFloweringSchedule == getFloweringTime())
 			{
-	
+
 				m_flowerStatus = FlowerState::EndFlowering;
 				break;
 			}
-	
-			m_daysInFloweringSchedule++;
+
 		}
-		if ((m_passedTemp % getWateringPeriod() == 1) || (++m_passedTemp% getWateringPeriod() == 0))
+		else
 		{
-			if (m_daysInFloweringSchedule == getFloweringTime())
+			if ((m_passedTemp % getWateringPeriod() == 1) || (++m_passedTemp% getWateringPeriod() == 0))
 			{
-	
-				m_flowerStatus = FlowerState::EndFlowering;
-				break;
+				m_daysInFloweringSchedule++;
+
+				if (m_daysInFloweringSchedule == getFloweringTime())
+				{
+
+					m_flowerStatus = FlowerState::EndFlowering;
+					break;
+				}
+
+				return;
 			}
-	
-			m_daysInFloweringSchedule++;
-			return;
-		}
-		else 
-		{
-			m_daysInFloweringSchedule = 0;
-			resetFloweringStatus();
+			else
+			{
+				m_daysInFloweringSchedule = 0;
+				resetFloweringStatus();
+			}
 		}
 	break;
 	default:
 		break;
 	}
 }
-//
-//void FloweringHouseplant::makeWatering()
-//{
-//
-//	logic_makeWatering();
-//	if (logic_isFlowering())
-//	{
-//		logic_endOfFlowering();
-//	}
-//
-//}
-//
-//void FloweringHouseplant::logic_makeWatering() 
-//{
-//	if (getPassedDays() % getPlantWateringPeriod() == 0) 
-//	{
-//		m_currentWaterings++;
-//		if (m_currentWaterings == m_needdedSuccesfulFlowerings)
-//		{
-//			m_flowerStatus = FlowerState::Flowering;
-//		}
-//		return;
-//	}
-//	else 
-//	{
-//		int m_passedTemp = getPassedDays();
-//		if ((m_passedTemp % getWateringPeriod() == 1) || (++m_passedTemp % getWateringPeriod() == 0)) 
-//		{
-//			return;
-//		}
-//	}
-//	if (m_currentWaterings) 
-//	{
-//		m_currentWaterings--;
-//		return;
-//	}
-//}
-//
-//bool FloweringHouseplant::logic_isFlowering()
-//{
-//	return (m_flowerStatus == FlowerState::Flowering) ? true : false;
-//}
-//
+
 void FloweringHouseplant::logic_endOfFlowering()
 {
 

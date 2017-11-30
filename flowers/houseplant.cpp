@@ -64,6 +64,11 @@ int HousePlant::getPlantWateringPeriod() const
 	return m_wateringPeriod;
 }
 
+void HousePlant::resetPassedDays()
+{
+	m_daysPassed = 0;
+}
+
 const Date & HousePlant::getDateOfLastWatering() const
 {
 	return m_dateOfLastWatering;
