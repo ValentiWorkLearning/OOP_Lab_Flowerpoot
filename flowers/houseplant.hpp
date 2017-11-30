@@ -22,15 +22,13 @@ public:
 
 	const Date & getDateOfLastWatering() const; //Get last date of watering
 
-	void setFirstWatering(const Date &_date); // Set date of fist watering plant
-
 	virtual void makeWatering() {}; // Virtual method - make watering of plant
 	
-	virtual void makeFirstWatering(const Date&) {}; //Virtual mehod - make first watering in non-init plant
+	virtual void makeFirstWatering(const Date& _date); //Virtual mehod - make first watering in non-init plant
 
-	virtual void dayPassed() {}; // Update plant 
+	virtual void dayPassed() { m_daysPassed++; }; // Update plant 
 
-	virtual int getPassedDays() { return 0;  }; // Return a num, of passed days
+	virtual int getPassedDays() { return m_daysPassed;  }; // Return a num, of passed days
 
 private:
 
@@ -40,9 +38,10 @@ private:
 
 	int m_wateringPeriod;//Period of watering plant
 
-	Date m_dateOfLastWatering;  //Date of last watering
-	
+	int m_daysPassed; // Num of passed days
+
 	bool m_firstWatering; // Is first watering?
+	Date m_dateOfLastWatering;  //Date of last watering
 
 protected: 
 

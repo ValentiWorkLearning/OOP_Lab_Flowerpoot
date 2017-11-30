@@ -18,16 +18,16 @@ int main()
 	//
 	//currentRoom.pourOnFlower("Kikus");
 	Date data;
-	//Create 10 years kikus with watering period 2, flowering time 3 and 3 succesful waterings for start Flowering
-	FloweringHouseplant kikus("Kikus", 10, 2, 2, 3);
-	kikus.dayPassed();
+	//Create 0 years kikus with watering period 2, 3 succesful waterings for start Flowering  and 6 flowering time
+	FloweringHouseplant kikus("Kikus", 0, 2, 3, 6);
 	std::cout << kikus.getPlantAge() << std::endl;
 	
 	std::cout << "New plant: " << kikus.getPlantName() << " with age: " << kikus.getPlantAge() << " ,flowering time: "
 		<< kikus.getFloweringTime() << " and " << kikus.getNeededSuccesfulWaterings() << " succesful waterings" << std::endl;
 
-	kikus.setFirstWatering(data); 
+	kikus.makeFirstWatering(data); 
 	
+	kikus.dayPassed();
 	kikus.dayPassed();
 
 	kikus.makeWatering();

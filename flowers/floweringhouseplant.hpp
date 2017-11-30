@@ -38,6 +38,8 @@ public:
 
 	void dayPassed()override ;
 
+	void makeFirstWatering(const Date& _date);
+
 protected:
 	
 	void resetWaterings();
@@ -53,8 +55,6 @@ private:
 	const int m_needdedSuccesfulFlowerings; // Needed value of succesful waterings
 
 	int m_currentWaterings; // Current value of succesful waterings 
-
-	int m_daysPassed;
 	
 	int m_daysInFloweringSchedule; 
 	
