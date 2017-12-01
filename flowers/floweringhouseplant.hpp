@@ -26,9 +26,9 @@ public:
 
 	int getWateringPeriod( );					// Get period of watering plant 
 
-	int getFloweringTime( ) const ;					// Get flowering time
+	int getFloweringTime( ) const ;				// Get flowering time
 
-	int getCurrentWaterings( ) const ;					// Get current waterings 
+	int getCurrentWaterings( ) const ;			// Get current waterings 
 
 	FlowerState getFlowerStatus( );				// Get flower status  - 0 not flowering, 1 - flowering, 2 - ebd of flowering
 
@@ -63,7 +63,8 @@ private:
 
 	bool m_isCorrectWateringInFlowering;		// Is correct watering in flowering state?
 
-	
+	int m_addedValuetoDays;
+
 	FlowerState m_flowerStatus;					// Current flower status
 
 	

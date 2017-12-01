@@ -1,11 +1,11 @@
 #include "floweringhouseplant.hpp"
 
 FloweringHouseplant::FloweringHouseplant(
-	std::string const& _name,
-	int _plantAge, 
-	int _irregationPeriod,  
-	int _needdedSuccesfulWaterings, 
-	int _floweringTime )
+	std::string const& _name
+	,int _plantAge
+	,int _irregationPeriod
+	,int _needdedSuccesfulWaterings
+	,int _floweringTime )
 	:
 	HousePlant(_name, _irregationPeriod ,_plantAge),
 	m_needdedSuccesfulWaterings(_needdedSuccesfulWaterings),
@@ -18,9 +18,14 @@ FloweringHouseplant::FloweringHouseplant(
 		throw std::logic_error(Messages::IncorrectFloweringTime);
 		
 	m_currentWaterings = 0;
+
 	m_flowerStatus = FlowerState::Growing;
+	
 	m_isCorrectWateringInFlowering = true;
+	
 	m_nDaysInFloweringState = 0;
+	
+	m_addedValuetoDays = 0;
 }
 
 //Getters methods 
@@ -100,7 +105,8 @@ void FloweringHouseplant::makeWatering()
 		else
 		{
 			m_currentWaterings++;
-			
+			addDay(getPassedDays() - m_addedValuetoDays);
+			m_addedValuetoDays = getPassedDays();
 			if (m_currentWaterings == m_needdedSuccesfulWaterings) m_flowerStatus = FlowerState::Flowering;
 		}
 		return;
@@ -125,7 +131,6 @@ void FloweringHouseplant::makeWatering()
 			if (m_currentWaterings)m_currentWaterings--;
 		}
 	}
-	
 }
 
 void FloweringHouseplant::logic_isEndOfFlowering()
