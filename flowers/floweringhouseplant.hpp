@@ -18,7 +18,7 @@ public:
 	);
 
 
-	enum class FlowerState { Growing, Flowering, EndFlowering };
+	enum class FlowerState { Growing, Flowering };
 
 	virtual ~FloweringHouseplant() = default;
 
@@ -41,25 +41,28 @@ public:
 	void makeFirstWatering(const Date& _date);
 
 protected:
-	
-	void resetWaterings();
-	void resetFloweringStatus();
+		
+	void logic_resetWateringPeriod();
 
-	void logic_makeWatering();
-	
-	void logic_endOfFlowering();
-	void logic_watering();
-	void logic_flowering();
+	void logic_isEndOfFlowering();
+
+	bool logic_isWateringAtTime();
+
+	bool logic_isWateringBeforeAfter1Day();
+
 
 private:
 
 	const int m_floweringTime; //Flowering time of plant
 	
-	const int m_needdedSuccesfulFlowerings; // Needed value of succesful waterings
+	const int m_needdedSuccesfulWaterings; // Needed value of succesful waterings
 
 	int m_currentWaterings; // Current value of succesful waterings 
 	
-	int m_daysInFloweringSchedule; 
+	int m_nDaysInFloweringState;
+
+	bool m_isCorrectWateringInFlowering; //Is correct watering in flowering state?
+
 	
 	FlowerState m_flowerStatus; // Current flower status
 
