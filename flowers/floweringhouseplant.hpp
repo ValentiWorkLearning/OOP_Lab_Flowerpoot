@@ -46,8 +46,11 @@ protected:
 	void resetFloweringStatus();
 
 	void logic_makeWatering();
-	void logic_endOfFlowering();
 	
+	void logic_endOfFlowering();
+	void logic_watering();
+	void logic_flowering();
+
 private:
 
 	const int m_floweringTime; //Flowering time of plant

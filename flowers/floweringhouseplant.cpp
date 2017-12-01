@@ -22,14 +22,6 @@ FloweringHouseplant::FloweringHouseplant(
 	m_daysInFloweringSchedule = 0;
 }
 
-void FloweringHouseplant::makeWatering()
-{
-	logic_makeWatering();
-	logic_endOfFlowering();
-	addDay(getPassedDays());
-	resetPassedDays();
-}
-
 //Getters methods 
 int FloweringHouseplant::getWateringPeriod()
 {
@@ -63,6 +55,16 @@ int FloweringHouseplant::getPassedDays()
 
 void FloweringHouseplant::dayPassed()
 {
+	if (getFlowerStatus() == FlowerState::Flowering) 
+	{
+		m_daysInFloweringSchedule++;
+
+		if (m_daysInFloweringSchedule == m_floweringTime) 
+		{
+			m_flowerStatus = FlowerState::EndFlowering;
+			incrementWateringPeriod(2);
+		}
+	}
 	HousePlant::dayPassed();
 }
 
@@ -71,8 +73,6 @@ void FloweringHouseplant::makeFirstWatering(const Date& _date)
 	HousePlant::makeFirstWatering(_date);
 	m_currentWaterings++;
 }
-
-
 
 //Reset methods
 void FloweringHouseplant::resetWaterings()
@@ -84,6 +84,23 @@ void FloweringHouseplant::resetFloweringStatus()
 {
 	m_flowerStatus = FlowerState::Growing;
 }
+
+//Flowering logic
+
+void FloweringHouseplant::makeWatering()
+{
+	//logic_makeWatering();
+	//logic_endOfFlowering();
+	//addDay(getPassedDays());
+	//resetPassedDays();
+	logic_watering();
+	if (m_currentWaterings == getNeededSuccesfulWaterings() || m_flowerStatus == FlowerState::Flowering) 
+	{
+		logic_flowering();
+		logic_endOfFlowering();
+	}
+}
+
 
 void FloweringHouseplant::logic_makeWatering()
 {
@@ -139,6 +156,28 @@ void FloweringHouseplant::logic_makeWatering()
 	}
 }
 
+
+void FloweringHouseplant::logic_watering()
+{
+	int m_passedTemp = getPassedDays();
+
+	if ((getPassedDays() % getWateringPeriod()) == 0)
+	{
+		m_currentWaterings++;
+		return;
+
+	}
+	if ((m_passedTemp % getWateringPeriod() == 1) || (++m_passedTemp % getWateringPeriod() == 0))
+	{
+		return;
+	}
+	else
+	{
+		if (m_currentWaterings)m_currentWaterings--;
+	}
+
+}
+
 void FloweringHouseplant::logic_endOfFlowering()
 {
 
@@ -149,4 +188,38 @@ void FloweringHouseplant::logic_endOfFlowering()
 		m_daysInFloweringSchedule = 0;
 		m_flowerStatus = FlowerState::Growing;
 	}
+}
+
+
+
+void FloweringHouseplant::logic_flowering()
+{
+	int m_passedTemp = getPassedDays();
+
+	switch (getFlowerStatus())
+	{
+
+	case FlowerState::Growing:
+		{
+		m_flowerStatus = FlowerState::Flowering;
+		m_currentWaterings = 0;
+		break;
+		}
+	case FlowerState::EndFlowering: 
+	{
+		m_flowerStatus = FlowerState::Growing;
+		break;
+	}
+	case FlowerState::Flowering: 
+	{
+		if ((m_passedTemp % getWateringPeriod() == 1) || (++m_passedTemp% getWateringPeriod() == 0) || (m_passedTemp % getWateringPeriod() == 0)) 
+		{
+			//m_daysInFloweringSchedule++;
+			m_neededWateringInFlowering++;
+		}
+	}
+	default:
+		break;
+	}
+
 }
