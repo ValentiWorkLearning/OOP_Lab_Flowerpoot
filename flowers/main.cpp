@@ -34,28 +34,33 @@ int main()
 	kikus.dayPassed();
 	//Тут увеличился период полива после окончания цветения
 
-	kikus.dayPassed();
-	kikus.dayPassed();
-	kikus.dayPassed();
+	//kikus.dayPassed();
+	//kikus.dayPassed();
+	//kikus.dayPassed();
+	//
+	//kikus.makeWatering();
+	//
+	//kikus.dayPassed();
+	//kikus.dayPassed();
+	//kikus.dayPassed();
+	//kikus.dayPassed();
+	//
+	//kikus.makeWatering();
+	//
+	//kikus.dayPassed();
+	//kikus.dayPassed();
+	////Тут упало?
+	//kikus.dayPassed();
+	//kikus.dayPassed();
+	//
+	//kikus.makeWatering();
 
+	kikus.dayPassed();
+	kikus.dayPassed();
+	kikus.dayPassed();
+	kikus.dayPassed();
+	
 	kikus.makeWatering();
-
-	kikus.dayPassed();
-	kikus.dayPassed();
-	kikus.dayPassed();
-	kikus.dayPassed();
-
-	kikus.makeWatering();
-
-	kikus.dayPassed();
-	kikus.dayPassed();
-	//Тут упало?
-	kikus.dayPassed();
-	kikus.dayPassed();
-
-	kikus.makeWatering();
-
-
     return 0;
 }
 
