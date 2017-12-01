@@ -114,29 +114,13 @@ void FloweringHouseplant::logic_makeWatering()
 		break;
 	
 	case FlowerState::Flowering:
-		if ((getPassedDays()% getWateringPeriod()) == 0) 
-		{
-			std::cout << "Great Job.. In Flowering process..." << getPlantName() << std::endl;
-			
-			m_daysInFloweringSchedule++;
-
-			if (m_daysInFloweringSchedule == getFloweringTime())
+		if ((m_passedTemp % getWateringPeriod() == 1) || (++m_passedTemp % getWateringPeriod() == 0) || (getPassedDays() % getWateringPeriod()) == 0)
 			{
-
-				m_flowerStatus = FlowerState::EndFlowering;
-				break;
-			}
-
-		}
-		else
-		{
-			if ((m_passedTemp % getWateringPeriod() == 1) || (++m_passedTemp% getWateringPeriod() == 0))
-			{
+				std::cout << "Great Job.. In Flowering process..." << getPlantName() << std::endl;
 				m_daysInFloweringSchedule++;
 
 				if (m_daysInFloweringSchedule == getFloweringTime())
 				{
-
 					m_flowerStatus = FlowerState::EndFlowering;
 					break;
 				}
@@ -148,8 +132,8 @@ void FloweringHouseplant::logic_makeWatering()
 				m_daysInFloweringSchedule = 0;
 				resetFloweringStatus();
 			}
-		}
 	break;
+
 	default:
 		break;
 	}

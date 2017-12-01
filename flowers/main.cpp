@@ -37,6 +37,16 @@ int main()
 		kikus.makeWatering();
 	}
 
+	for (int i = 0; i < 10; i++)
+	{
+		for (int j = 0; j < 8; j++)
+		{
+			kikus.dayPassed();
+		}
+		kikus.makeWatering();
+	}
+
+
     return 0;
 }
 
