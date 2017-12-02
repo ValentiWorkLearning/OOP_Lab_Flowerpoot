@@ -40,9 +40,9 @@ private:
 	
 	int m_plantAge;
 
-	int m_wateringPeriod;//Period of watering plant
-	int m_daysPassed; // Num of passed days
-	bool m_firstWatering; // Is first watering?
+	int m_wateringPeriod;		//Period of watering plant
+	int m_daysPassed;			// Num of passed days
+	bool m_firstWatering;		// Is first watering?
 	Date m_dateOfLastWatering;  //Date of last watering
 
 protected: 
