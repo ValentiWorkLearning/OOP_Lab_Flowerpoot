@@ -81,7 +81,7 @@ void FloweringHouseplant::dayPassed()
 
 	if (getFlowerStatus() == FlowerState::Flowering)  //If flower is flowering ->
 	{
-		if (m_isCorrectWateringInFlowering)  // -> check the correct  watering in flowering process
+		if (m_isCorrectWateringInFlowering && !logic_needWateringToday() )  // -> check the correct  watering in flowering process
 		{
 			m_nDaysInFloweringState++;
 		}
@@ -160,7 +160,18 @@ bool FloweringHouseplant::logic_isWateringBeforeAfter1Day()
 	Date dateOfLastWatering = getDateOfLastWatering();
 	Date currentDate;
 
+	currentDate.addDay(getPassedDays());
+
 	return (dateOfLastWatering.dayDifference(currentDate) == getPlantWateringPeriod() + 1 || 
 		dateOfLastWatering.dayDifference(currentDate) == getPlantWateringPeriod() -1) ? true : false;
+}
+
+bool FloweringHouseplant::logic_needWateringToday()
+{
+	Date currentDate;
+	Date lastWatering = getDateOfLastWatering();
+	currentDate.addDay(getPassedDays());
+
+	return ( lastWatering.dayDifference(currentDate) > getPlantWateringPeriod()+1) ? true:false;
 }
 

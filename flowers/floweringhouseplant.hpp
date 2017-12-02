@@ -48,7 +48,9 @@ protected:
 
 	bool logic_isWateringAtTime();				//Is waterinng AT TIME, not after or before 1 day
 
-	bool logic_isWateringBeforeAfter1Day();		 
+	bool logic_isWateringBeforeAfter1Day();	
+
+	bool logic_needWateringToday();
 
 
 private:
