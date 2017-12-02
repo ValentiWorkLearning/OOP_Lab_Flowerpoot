@@ -21,6 +21,7 @@ Date::Date()
 	m_year = currentTM->tm_year + 1900;
 	m_month = currentTM->tm_mon + 1;
 	m_day = currentTM->tm_mday;
+
 }
 
 
@@ -176,7 +177,28 @@ void Date::addDay(int _nDay)
 		m_month = 1;
 		m_year++;
 	}
-	
+
+}
+
+int Date::dayDifference(Date & _d2)
+{
+	//tm_sec , tm_min, tm_hour, tn_mday, tm_mon, tm_year
+	struct tm thisTime { 0, 0, 0, getDay(), (getMonth() - 1), (getYear() - 1900) };
+
+	struct tm incomingTime { 0, 0, 0, _d2.getDay(), (_d2.getMonth() - 1), (_d2.getYear() - 1900) };
+
+	time_t thisTime_t;
+	time_t incomingTime_t;
+
+	double difference = 0;
+	const int SedondsInDay = 86400;
+
+	thisTime_t = mktime(&thisTime);
+	incomingTime_t = mktime(&incomingTime);
+
+	difference = difftime(incomingTime_t, thisTime_t);
+
+	return difference / SedondsInDay;
 }
 
 

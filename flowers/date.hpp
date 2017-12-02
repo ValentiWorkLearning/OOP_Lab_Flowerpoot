@@ -35,7 +35,9 @@ public:
 	bool operator <= (Date d) const;
 	bool operator > (Date d) const;
 	bool operator >= (Date d) const;
+
 	void addDay(int _nDay);
+	int  dayDifference(Date & _d2);
 	/*-----------------------------------------------------------------*/
 
 private:
@@ -43,7 +45,6 @@ private:
 	/*-----------------------------------------------------------------*/
 
 	bool isValid() const;
-
 	/*-----------------------------------------------------------------*/
 
 	int m_year, m_month, m_day;
