@@ -24,8 +24,7 @@ FloweringHouseplant::FloweringHouseplant(
 	m_isCorrectWateringInFlowering = true;
 	
 	m_nDaysInFloweringState = 0;
-	
-	m_addedValuetoDays = 0;
+
 }
 
 //Getters methods 
@@ -59,12 +58,6 @@ int FloweringHouseplant::getPassedDays()
 	return HousePlant::getPassedDays();
 }
 
-void FloweringHouseplant::makeFirstWatering(const Date& _date)
-{
-	HousePlant::makeFirstWatering(_date);
-	m_currentWaterings++;
-}
-
 //Reset methods
 void FloweringHouseplant::logic_resetWateringPeriod() 
 {
@@ -95,7 +88,6 @@ void FloweringHouseplant::dayPassed()
 
 void FloweringHouseplant::makeWatering()
 {
-	
 	if ( logic_isWateringAtTime() )
 	{
 		if (getFlowerStatus() == FlowerState::Flowering)

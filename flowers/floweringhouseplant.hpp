@@ -38,8 +38,6 @@ public:
 
 	void dayPassed( )override ;					// In father class increment the m_passedDays, in child  - actions to chek state flower
 
-	void makeFirstWatering( const Date& _date );// Init watering to flower
-
 protected:
 		
 	void logic_resetWateringPeriod();			// Reset the all values in watering period
@@ -65,11 +63,7 @@ private:
 
 	bool m_isCorrectWateringInFlowering;		// Is correct watering in flowering state?
 
-	int m_addedValuetoDays;
-
-	FlowerState m_flowerStatus;					// Current flower status
-
-	
+	FlowerState m_flowerStatus;					// Current flower status	
 	
 };
 

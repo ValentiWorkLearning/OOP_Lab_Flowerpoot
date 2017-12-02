@@ -21,9 +21,8 @@ HousePlant::HousePlant
 	m_wateringPeriod = _wateringPeriod;
 	m_plantName = _plantName;
 	m_plantAge = _plantAge;
-	m_firstWatering = false;
 	m_daysPassed = 0;
-	m_dateOfLastWatering = Date(1, 1, 1);
+	m_dateOfLastWatering = Date();
 
 }
 
@@ -36,16 +35,6 @@ void HousePlant::incrementWateringPeriod( int _inc)
 void HousePlant::addDay(int _nDays)
 {
 	m_dateOfLastWatering.addDay(_nDays);
-}
-
-
-void HousePlant::makeFirstWatering(const Date & _date) 
-{
-	if (m_firstWatering)
-		throw std::logic_error(Messages::RepeatInitOfFirstWatering);
-
-	m_firstWatering = true;
-	m_dateOfLastWatering = _date;
 }
 
 //Getters methods

@@ -28,8 +28,6 @@ public:
 
 	virtual void makeWatering() {}; // Virtual method - make watering of plant
 	
-	virtual void makeFirstWatering(const Date& _date); //Virtual mehod - make first watering in non-init plant
-
 	virtual void dayPassed() { m_daysPassed++; }; // Update plant 
 
 	virtual int getPassedDays() { return m_daysPassed;  }; // Return a num, of passed days
@@ -42,7 +40,6 @@ private:
 
 	int m_wateringPeriod;		//Period of watering plant
 	int m_daysPassed;			// Num of passed days
-	bool m_firstWatering;		// Is first watering?
 	Date m_dateOfLastWatering;  //Date of last watering
 
 protected: 
