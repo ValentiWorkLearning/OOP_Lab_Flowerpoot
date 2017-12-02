@@ -3,6 +3,7 @@
 /*****************************************************************************/
 
 #include "floweringhouseplant.hpp"
+#include "ArtificialHousePlant.h"
 #include "messages.hpp"
 
 #include "testslib.hpp"
@@ -140,22 +141,17 @@ DECLARE_OOP_TEST(test_succesful_invariants_test)
 
 	assert(kikus.getPlantWateringPeriod() == (prevWateringPeriod += 2));
 
-	for (int i = 0; i < 3; i++) 
-	{
-		for (int j = 0; j < 4; j++) 
-		{
-			kikus.dayPassed();
-		}
-		kikus.makeWatering();
-	}
-	kikus.dayPassed();
-	kikus.dayPassed();
-	kikus.makeWatering();
-	kikus.dayPassed();
-	kikus.dayPassed();
-	kikus.makeWatering();
+}
 
-	assert(kikus.getPlantWateringPeriod() == (prevWateringPeriod += 2));
+DECLARE_OOP_TEST(test_create_and_actions_in_artificial_houseplant) 
+{
+	ArtificialHousePlant artificial("Decor Element");
+
+	ASSERT_THROWS(artificial.getDateOfLastWatering(), Messages::ArtificialError);
+	ASSERT_THROWS(artificial.setDateOfLastWatering(Date()), Messages::ArtificialError);
+	ASSERT_THROWS(artificial.makeWatering(), Messages::ArtificialError);
+	ASSERT_THROWS(artificial.getPlantWateringPeriod(), Messages::ArtificialError);
+
 }
 /*****************************************************************************/
 
