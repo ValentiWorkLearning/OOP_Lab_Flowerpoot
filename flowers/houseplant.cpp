@@ -69,7 +69,13 @@ void HousePlant::resetPassedDays()
 	m_daysPassed = 0;
 }
 
-const Date & HousePlant::getDateOfLastWatering() const
+const Date & HousePlant::getDateOfLastWatering() 
 {
 	return m_dateOfLastWatering;
+}
+
+void HousePlant::setDateOfLastWatering(Date _date)
+{
+	_date.addDay(getPassedDays());
+	m_dateOfLastWatering = _date;
 }

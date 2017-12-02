@@ -22,7 +22,9 @@ public:
 
 	void resetPassedDays();
 
-	const Date & getDateOfLastWatering() const; //Get last date of watering
+	const Date & getDateOfLastWatering() ; //Get last date of watering
+
+	void setDateOfLastWatering(Date _date);
 
 	virtual void makeWatering() {}; // Virtual method - make watering of plant
 	
