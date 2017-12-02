@@ -18,7 +18,7 @@ public:
 	);
 
 
-	enum class FlowerState { Growing, Flowering };
+	enum class FlowerState { Growing, Flowering , Fruiting};
 
 	virtual ~FloweringHouseplant( ) = default;
 

@@ -8,26 +8,25 @@ class ArtificialHousePlant final : public HousePlant
 public :
 	ArtificialHousePlant(const std::string & _name);
 
-	void makeWatering() override;
 	void dayPassed() override;
-	void  makeFirstWatering(const Date& _date )override;
+
+	int getPlantWateringPeriod() const { throw std::logic_error(Messages::ArtificialError); }; //Get plant watering period
+
+	const Date & getDateOfLastWatering()   { throw std::logic_error(Messages::ArtificialError); } 
+
+	void setDateOfLastWatering(Date _date) { throw std::logic_error(Messages::ArtificialError); }
+
+	void makeWatering() { throw std::logic_error(Messages::ArtificialError); }
+
+	int getPassedDays() { return HousePlant::getPassedDays(); };
 };
 
-ArtificialHousePlant::ArtificialHousePlant(const std::string & _name) : HousePlant(_name, 0,1)
+ArtificialHousePlant::ArtificialHousePlant(const std::string & _name) : HousePlant(_name, 1,1)
 {
-}
-inline void ArtificialHousePlant::makeWatering()
-{
-	std::cout << "Error! You cant watering this plant!";
 }
 
 inline void ArtificialHousePlant::dayPassed() 
 { 
 	return; 
-}
-
-inline void ArtificialHousePlant::makeFirstWatering(const Date& _date )
-{
-	return;
 }
 #endif

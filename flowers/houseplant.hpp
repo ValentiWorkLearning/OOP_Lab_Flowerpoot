@@ -20,8 +20,6 @@ public:
 
 	int getPlantWateringPeriod() const; //Get plant watering period
 
-	void resetPassedDays();
-
 	const Date & getDateOfLastWatering() ; //Get last date of watering
 
 	void setDateOfLastWatering(Date _date);

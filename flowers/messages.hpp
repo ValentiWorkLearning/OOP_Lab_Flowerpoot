@@ -14,6 +14,7 @@ namespace Messages
 	const char * const IncorrectFloweringTime = "Incorrect flowering time!";
 	const char * const PlantDoesNotExist = "Plant does not exist!";
 	const char * const RepeatInitOfFirstWatering = "Repeat init of first watering";
+	const char * const ArtificialError = "It`s Artificial houseplant. You cant`t do it.";
 	/*-----------------------------------------------------------------*/
 
 

@@ -1,8 +1,8 @@
 #include "room.hpp"
 
-void Room::addFloweringPlant(std::string const & _plantName, int _plantAge, int _irregationPeriod, int _needdedSuccesfulFlowerings, int _floweringTime)
+void Room::addFloweringPlant(std::string const & _plantName, int _plantAge, int _wateringPeriod, int _needdedSuccesfulFlowerings, int _floweringTime)
 {
-	m_plants.insert({ _plantName,std::make_unique<FloweringHouseplant>(_plantName,_plantAge,_irregationPeriod, 
+	m_plants.insert({ _plantName,std::make_unique<FloweringHouseplant>(_plantName,_plantAge,_wateringPeriod,
 		_needdedSuccesfulFlowerings, _floweringTime)  } ) ;
 }
 
