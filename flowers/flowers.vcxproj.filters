@@ -1,0 +1,78 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Model">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="Room">
+      <UniqueIdentifier>{73cab994-f7af-4eda-b2df-573ff73790bc}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="ReadMe.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="date.cpp">
+      <Filter>Model</Filter>
+    </ClCompile>
+    <ClCompile Include="floweringhouseplant.cpp">
+      <Filter>Model</Filter>
+    </ClCompile>
+    <ClCompile Include="houseplant.cpp">
+      <Filter>Model</Filter>
+    </ClCompile>
+    <ClCompile Include="room.cpp">
+      <Filter>Model</Filter>
+    </ClCompile>
+    <ClCompile Include="test.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="fruitinghouseplant.cpp">
+      <Filter>Model</Filter>
+    </ClCompile>
+    <ClCompile Include="foliarhouseplant.cpp">
+      <Filter>Model</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="date.hpp">
+      <Filter>Model</Filter>
+    </ClInclude>
+    <ClInclude Include="messages.hpp">
+      <Filter>Room</Filter>
+    </ClInclude>
+    <ClInclude Include="floweringhouseplant.hpp">
+      <Filter>Model</Filter>
+    </ClInclude>
+    <ClInclude Include="houseplant.hpp">
+      <Filter>Model</Filter>
+    </ClInclude>
+    <ClInclude Include="room.hpp">
+      <Filter>Model</Filter>
+    </ClInclude>
+    <ClInclude Include="ArtificialHousePlant.h">
+      <Filter>Model</Filter>
+    </ClInclude>
+    <ClInclude Include="testslib.hpp">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="fruitinghouseplant.hpp">
+      <Filter>Model</Filter>
+    </ClInclude>
+    <ClInclude Include="foliarhouseplant.hpp">
+      <Filter>Model</Filter>
+    </ClInclude>
+    <ClInclude Include="visitor.hpp">
+      <Filter>Room</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>
