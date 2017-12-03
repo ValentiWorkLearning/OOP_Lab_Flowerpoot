@@ -64,10 +64,10 @@ void FruitingHousePlant::dayPassed()
 	if(logic_isEndOfFlowering())
 	{
 		logic_setFlowerState(FlowerState::Fruiting);
-		m_nDaysInFloweringState = 0;
+		logic_resetDaysInFloweringState();
 		return;
 	}
-	if (!logic_needWateringToday())
+	if (m_isCorrectWateringInFruiting && !logic_needWateringToday())
 	{
 		if (FlowerState::Fruiting == getFlowerStatus())
 		{
