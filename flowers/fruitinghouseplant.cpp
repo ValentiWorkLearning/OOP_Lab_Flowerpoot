@@ -22,14 +22,20 @@ FruitingHousePlant::FruitingHousePlant
 	,m_fruitingTime(_fruitingTime)
 	,m_fruitName(_fruitName)
 {
+	if (_fruitName.empty()) throw std::logic_error(Messages::EmptyFruitName);
+	if (_fruitingTime <= 0) throw std::logic_error(Messages::IncorrectFruitingPeriod);
+
 	m_daysInFruiting = 0;
-	m_isCorrectWateringInFruiting = true;
 }
 void FruitingHousePlant::makeWatering()
 {
 	if (logic_isEndOfFlowering())
 	{
 		logic_setFlowerState(FlowerState::Fruiting) ;
+		logic_independentWatering(m_isCorrectWateringInFruiting, FlowerState::Fruiting);
+	}
+	if (getFlowerStatus() == FlowerState::Fruiting) 
+	{
 		logic_independentWatering(m_isCorrectWateringInFruiting, FlowerState::Fruiting);
 	}
 	else
@@ -59,10 +65,19 @@ void FruitingHousePlant::dayPassed()
 	{
 		logic_setFlowerState(FlowerState::Fruiting);
 		m_nDaysInFloweringState = 0;
+		return;
 	}
-	if (m_isCorrectWateringInFruiting && !logic_needWateringToday())
+	if (!logic_needWateringToday())
 	{
-		m_daysInFruiting++;
+		if (FlowerState::Fruiting == getFlowerStatus())
+		{
+			m_daysInFruiting++;
+		}
+	}
+	else 
+	{
+		logic_resetWateringPeriod();
+		logic_resetFruiting();
 	}
 
 	if (logic_isEndOfFruiting()) 
@@ -76,7 +91,7 @@ bool FruitingHousePlant::logic_isEndOfFruiting()
 {
 	if (getFruitingTime() == m_daysInFruiting) 
 	{
-		std::cout << "Fruit:" << getFruitName() << "has succesfuly complete the fruiting";
+		std::cout<< std::endl << "Fruit: " << getFruitName() << " has succesfuly complete the fruiting!"<<std::endl;
 		return true;
 	}
 	return false;
@@ -85,6 +100,5 @@ bool FruitingHousePlant::logic_isEndOfFruiting()
 void FruitingHousePlant::logic_resetFruiting()
 {
 	m_daysInFruiting = 0;
-	m_isCorrectWateringInFruiting = true;
 	logic_resetWateringPeriod();
 }
