@@ -5,6 +5,8 @@
 #include "floweringhouseplant.hpp"
 #include "ArtificialHousePlant.h"
 #include "fruitinghouseplant.hpp"
+#include "foliarhouseplant.hpp"
+
 #include "messages.hpp"
 
 #include "testslib.hpp"
@@ -402,5 +404,41 @@ DECLARE_OOP_TEST(test_fruititng_houseplant__invariants_test_5)
 	
 	assert(orangeTree.getPlantWateringPeriod() == 8);
 }
+
+DECLARE_OOP_TEST(test_create_foliar_houseplant) 
+{
+	FoliarHousePlant m_kikus("Kikus", 4, 0, 4);
+
+	assert(m_kikus.getPlantName() == "Kikus");
+	assert(m_kikus.getCurrentHeight() == 4);
+	assert(m_kikus.getPlantAge() == 0);
+}
+
+DECLARE_OOP_TEST(test_create_foliar_houseplant_invalid_initial_height)
+{
+	ASSERT_THROWS(FoliarHousePlant ("Kikus", 4, 0, -49) , Messages::IncorrectInitialHeight);	
+}
+
+DECLARE_OOP_TEST(test_create_foliar_houseplant_make_waterings)
+{
+	FoliarHousePlant m_kikus("Kikus", 4, 0, 4);
+	
+	int currentHeight = m_kikus.getCurrentHeight();
+	
+	const int makeWaterings = 8;
+	const int passedDays = 5;
+
+	for (int i = 0; i < makeWaterings; i++) 
+	{
+		m_kikus.makeWatering();
+		for (int j = 0; j < passedDays; j++)
+		{
+			m_kikus.dayPassed();
+		}
+	}
+	assert(m_kikus.getCurrentHeight() == (passedDays*makeWaterings - 1));
+
+}
+
 /*****************************************************************************/
 
