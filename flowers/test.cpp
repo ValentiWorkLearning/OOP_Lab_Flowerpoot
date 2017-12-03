@@ -62,16 +62,20 @@ DECLARE_OOP_TEST(test_succesful_1_flowering_period)
 	kikus.dayPassed();
 	kikus.dayPassed();
 	kikus.makeWatering();
+	assert(kikus.getCurrentWaterings() == 1);
 
 	kikus.dayPassed();
 	kikus.dayPassed();
 	kikus.makeWatering();
+	assert(kikus.getCurrentWaterings() == 2);
 
 	assert(kikus.getCurrentWaterings() == kikus.getNeededSuccesfulWaterings());
 	assert(kikus.getFlowerStatus() == FloweringHouseplant::FlowerState::Flowering);
 
+	//Pass two days without watering
 	kikus.dayPassed();
 	kikus.dayPassed();
+	assert(kikus.getFlowerStatus() == FloweringHouseplant::FlowerState::Growing);
 	assert(kikus.getPlantWateringPeriod() == (prevWateringPeriod += 2));
 }
 
@@ -102,36 +106,46 @@ DECLARE_OOP_TEST(test_succesful_2_flowering_periods)
 	assert(kikus.getPlantWateringPeriod() == (prevWateringPeriod += 2));	
 }
 
-DECLARE_OOP_TEST(test_succesful_invariants_test) 
+DECLARE_OOP_TEST(test_floweringhouseplant_invariants_test_1)
 {
 	FloweringHouseplant kikus("Kikus", 0, 2, 2, 4);
 
 	int prevWateringPeriod = kikus.getPlantWateringPeriod();
 
+	//Watering on schedule
 	kikus.dayPassed();
 	kikus.dayPassed();
 	kikus.makeWatering();
+	assert(kikus.getCurrentWaterings() == 1);
 
+	//Watering on schedule
 	kikus.dayPassed();
 	kikus.dayPassed();
 	kikus.makeWatering();
-
+	assert(kikus.getCurrentWaterings() == 2);
+	
+	//Forget about kikus for 4 days
 	kikus.dayPassed();
 	kikus.dayPassed();
 	kikus.dayPassed();
 	kikus.dayPassed();
-
+	assert(kikus.getCurrentWaterings() == 0);
 	assert(kikus.getFlowerStatus() == FloweringHouseplant::FlowerState::Growing);
 
+	//Initial watering , but not in schedule
 	kikus.makeWatering();
 	
+	//Watering on schedule
 	kikus.dayPassed();
 	kikus.dayPassed();
 	kikus.makeWatering();
-
+	assert(kikus.getCurrentWaterings() == 1);
+	
+	//Watering on schedule
 	kikus.dayPassed();
 	kikus.dayPassed();
 	kikus.makeWatering();
+	assert(kikus.getCurrentWaterings() == 2);
 	assert(kikus.getFlowerStatus() == FloweringHouseplant::FlowerState::Flowering);
 	
 	kikus.dayPassed();
@@ -140,7 +154,56 @@ DECLARE_OOP_TEST(test_succesful_invariants_test)
 	kikus.makeWatering();
 	kikus.dayPassed();
 
+	assert(kikus.getFlowerStatus() == FloweringHouseplant::FlowerState::Growing);
 	assert(kikus.getPlantWateringPeriod() == (prevWateringPeriod += 2));
+
+}
+
+DECLARE_OOP_TEST(test_floweringhouseplant_invariants_test_2) 
+{
+	FloweringHouseplant kikus("Kikus", 0, 2, 2, 4);
+	//Trying to make waterflow
+	kikus.makeWatering();
+	kikus.makeWatering();
+	kikus.makeWatering();
+	kikus.makeWatering();
+	//It`s not good idea
+	assert(kikus.getFlowerStatus() == FloweringHouseplant::FlowerState::Growing);
+	
+	//Watering on schedule
+	kikus.dayPassed();
+	kikus.dayPassed();
+	kikus.makeWatering();
+	assert(kikus.getCurrentWaterings() == 1);
+	
+
+	//Watering on schedule, but pass 1 day
+	kikus.dayPassed();
+	kikus.dayPassed();
+	kikus.dayPassed();
+	kikus.makeWatering();
+	assert(kikus.getCurrentWaterings() == 1);
+
+	//Watering on schedule
+	kikus.dayPassed();
+	kikus.dayPassed();
+	kikus.makeWatering();
+	assert(kikus.getCurrentWaterings() == 2);
+
+
+	//Kikus succesfuly start flowering
+	kikus.dayPassed();
+	assert(kikus.getFlowerStatus() == FloweringHouseplant::FlowerState::Flowering);
+
+	//Trying to make waterflow
+	kikus.makeWatering();
+	kikus.makeWatering();
+	kikus.makeWatering();
+	kikus.makeWatering();
+	kikus.dayPassed();
+
+	//Of course, it shoked and reset flowering state
+	assert(kikus.getFlowerStatus() == FloweringHouseplant::FlowerState::Growing);
 
 }
 
@@ -203,5 +266,141 @@ DECLARE_OOP_TEST(test_fruititng_houseplant_correct_fruiting)
 	assert(m_fruit.getPlantWateringPeriod() == (prevWateringPeriod += 2));
 }
 
+DECLARE_OOP_TEST(test_fruititng_houseplant__invariants_test_1) 
+{
+
+	FruitingHousePlant orangeTree("Orange tree", "Orange ", 0, 4, 4, 2, 10);
+	
+	for (int i = 0; i < 3; i++) 
+	{
+		for (int j = 0; j < 4; j++) 
+		{
+			orangeTree.dayPassed();
+		}
+		orangeTree.makeWatering();
+	}
+	assert(orangeTree.getFlowerStatus() == FloweringHouseplant::FlowerState::Growing);
+	assert(orangeTree.getCurrentWaterings() == 3);
+
+	for (int i = 0; i < 7; i++) 
+	{
+		orangeTree.dayPassed();
+	}
+	assert(orangeTree.getCurrentWaterings() == 0);
+	assert(orangeTree.getFlowerStatus() == FloweringHouseplant::FlowerState::Growing);
+}
+
+DECLARE_OOP_TEST(test_fruititng_houseplant__invariants_test_2) 
+{
+	FruitingHousePlant orangeTree("Orange tree", "Orange ", 0, 4, 4, 2, 10);
+	for (int i = 0; i < 4; i++)
+	{
+		for (int j = 0; j < 4; j++)
+		{
+			orangeTree.dayPassed();
+		}
+		orangeTree.makeWatering();
+	}
+	assert(orangeTree.getFlowerStatus() == FloweringHouseplant::FlowerState::Flowering);
+
+	orangeTree.dayPassed();
+	orangeTree.makeWatering();
+	orangeTree.dayPassed();
+	assert(orangeTree.getFlowerStatus() == FloweringHouseplant::FlowerState::Growing);
+
+}
+
+DECLARE_OOP_TEST(test_fruititng_houseplant__invariants_test_3)
+{
+	FruitingHousePlant orangeTree("Orange tree", "Orange ", 0, 4, 4, 2, 4);
+	for (int i = 0; i < 4; i++)
+	{
+		for (int j = 0; j < 4; j++)
+		{
+			orangeTree.dayPassed();
+		}
+		orangeTree.makeWatering();
+	}
+	assert(orangeTree.getFlowerStatus() == FloweringHouseplant::FlowerState::Flowering);
+
+	orangeTree.dayPassed();
+	orangeTree.dayPassed();
+	assert(orangeTree.getFlowerStatus() == FloweringHouseplant::FlowerState::Fruiting);
+
+	orangeTree.dayPassed();
+	orangeTree.dayPassed();
+	orangeTree.dayPassed();
+	orangeTree.dayPassed();
+	assert(orangeTree.getFlowerStatus() == FloweringHouseplant::FlowerState::Growing);
+}
+
+DECLARE_OOP_TEST(test_fruititng_houseplant__invariants_test_4)
+{
+	FruitingHousePlant orangeTree("Orange tree", "Orange ", 0, 4, 4, 2, 4);
+	int prevWateringPeriod = orangeTree.getPlantWateringPeriod();
+	for (int i = 0; i < 4; i++)
+	{
+		for (int j = 0; j < 4; j++)
+		{
+			orangeTree.dayPassed();
+		}
+		orangeTree.makeWatering();
+	}
+	assert(orangeTree.getFlowerStatus() == FloweringHouseplant::FlowerState::Flowering);
+
+	orangeTree.dayPassed();
+	orangeTree.dayPassed();
+	assert(orangeTree.getFlowerStatus() == FloweringHouseplant::FlowerState::Fruiting);
+
+	orangeTree.dayPassed();
+	orangeTree.dayPassed();
+	orangeTree.dayPassed();
+	orangeTree.makeWatering();
+	orangeTree.dayPassed();
+
+	assert(orangeTree.getFlowerStatus() == FloweringHouseplant::FlowerState::Growing);
+	assert(orangeTree.getPlantWateringPeriod() == (prevWateringPeriod += 2));
+}
+
+DECLARE_OOP_TEST(test_fruititng_houseplant__invariants_test_5)
+{
+	FruitingHousePlant orangeTree("Orange tree", "Orange ", 0, 4, 4, 2, 4);
+
+	for (int i = 0; i < 4; i++)
+	{
+		for (int j = 0; j < 4; j++)
+		{
+			orangeTree.dayPassed();
+		}
+		orangeTree.makeWatering();
+	}
+	assert(orangeTree.getFlowerStatus() == FloweringHouseplant::FlowerState::Flowering);
+
+	for (int i = 0; i < 5; i++)
+	{
+		orangeTree.dayPassed();
+	}
+	orangeTree.makeWatering();
+	orangeTree.dayPassed();
+	//Finish correct flowering plant
+
+	//Correct the plant waterings
+	for (int i = 0; i < 5; i++)
+	{
+		orangeTree.dayPassed();
+	}
+	orangeTree.makeWatering();
+	
+	for (int i = 0; i < 4; i++) 
+	{
+		for (int j = 0; j < 6; j++) 
+		{
+			orangeTree.dayPassed();
+		}
+		orangeTree.makeWatering();
+	}
+	
+	assert(orangeTree.getPlantWateringPeriod() == 8);
+}
 /*****************************************************************************/
 
