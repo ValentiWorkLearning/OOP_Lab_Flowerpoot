@@ -71,70 +71,30 @@ void FloweringHouseplant::logic_resetWateringPeriod()
 void FloweringHouseplant::dayPassed()
 {
 	HousePlant::dayPassed(); //Pass the day 
+	
+	logic_passedDay();
 
-	if (getFlowerStatus() == FlowerState::Flowering)  //If flower is flowering ->
+	if (logic_isEndOfFlowering()) 
 	{
-		if (m_isCorrectWateringInFlowering && !logic_needWateringToday() )  // -> check the correct  watering in flowering process
-		{
-			m_nDaysInFloweringState++;
-		}
-		else
-		{
-			logic_resetWateringPeriod();
-		}
+		incrementWateringPeriod(2);
+		logic_resetWateringPeriod();
 	}
-	logic_isEndOfFlowering(); //Chek is the end of flowering period?
 }
 
 void FloweringHouseplant::makeWatering()
 {
-	if ( logic_isWateringAtTime() )
-	{
-		if (getFlowerStatus() == FlowerState::Flowering)
-		{
-			m_isCorrectWateringInFlowering = true;
-		}
-		else
-		{
-			m_currentWaterings++;
-			if (m_currentWaterings == m_needdedSuccesfulWaterings) m_flowerStatus = FlowerState::Flowering;
-		}
-		HousePlant::setDateOfLastWatering(Date());
-		return;
-
-	}
-	if (logic_isWateringBeforeAfter1Day())
-	{
-		if (getFlowerStatus() == FlowerState::Flowering)
-		{
-			m_isCorrectWateringInFlowering = true;
-		}
-		HousePlant::setDateOfLastWatering(Date());
-		return;
-	}
-	else
-	{
-		if (getFlowerStatus() == FlowerState::Flowering) //If flowering process - reset the corrects waterings 
-		{
-			m_isCorrectWateringInFlowering = false;
-		}
-		else
-		{
-			if (m_currentWaterings)m_currentWaterings--;
-		}
-	}
-	HousePlant::setDateOfLastWatering(Date());
+	logic_independentWatering(m_isCorrectWateringInFlowering, FlowerState::Flowering);
 }
 
-void FloweringHouseplant::logic_isEndOfFlowering()
+bool FloweringHouseplant::logic_isEndOfFlowering()
 {
 
 	if (getFloweringTime() == m_nDaysInFloweringState) 
 	{
 		std::cout << "Congratulation! Your plant name:" << getPlantName() << " has succesfully completed the flowering" << std::endl;
-		incrementWateringPeriod(2);
-		logic_resetWateringPeriod();
+		return true;
 	}
+	return false;
 }
 
 bool FloweringHouseplant::logic_isWateringAtTime()
@@ -166,4 +126,70 @@ bool FloweringHouseplant::logic_needWateringToday()
 
 	return ( lastWatering.dayDifference(currentDate) > getPlantWateringPeriod()+1) ? true:false;
 }
+
+void FloweringHouseplant::logic_independentWatering(bool _setUpFlag, FlowerState _triggeredState)
+{
+
+	if (logic_isWateringAtTime())
+	{
+		if (getFlowerStatus() == _triggeredState)
+		{
+			_setUpFlag = true;
+		}
+		else
+		{
+			m_currentWaterings++;
+			if (m_currentWaterings == m_needdedSuccesfulWaterings) m_flowerStatus = FlowerState::Flowering;
+		}
+		HousePlant::setDateOfLastWatering(Date());
+		return;
+
+	}
+	if (logic_isWateringBeforeAfter1Day())
+	{
+		if (getFlowerStatus() == _triggeredState)
+		{
+			_setUpFlag = true;
+		}
+		HousePlant::setDateOfLastWatering(Date());
+		return;
+	}
+	else
+	{
+		if (getFlowerStatus() == _triggeredState) //If flowering process - reset the corrects waterings 
+		{
+			_setUpFlag = false;
+		}
+		else
+		{
+			if (m_currentWaterings)m_currentWaterings--;
+		}
+	}
+	HousePlant::setDateOfLastWatering(Date());
+
+
+}
+
+void FloweringHouseplant::logic_setFlowerState(FlowerState  _flowerState)
+{
+	m_flowerStatus = _flowerState;
+}
+
+void FloweringHouseplant::logic_passedDay()
+{
+	if (getFlowerStatus() == FlowerState::Flowering)
+	{
+		if (m_isCorrectWateringInFlowering && !logic_needWateringToday())
+		{
+			m_nDaysInFloweringState++;
+		}
+		else
+		{
+			logic_resetWateringPeriod();
+		}
+	}
+}
+
+
+
 
