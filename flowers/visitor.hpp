@@ -1,9 +1,8 @@
 #ifndef VISITOR_H
 #define VISITOR_H
 
-class FruitingHousePlant;
+class HousePlant;
 class FoliarHousePlant;
-class FloweringHouseplant;
 
 class FlowersVisitor 
 {
@@ -11,12 +10,9 @@ public:
 
 	virtual ~FlowersVisitor() = default;
 	
-	virtual void visit(FruitingHousePlant & _fruit) {};
-
-	virtual void visit(FoliarHousePlant & _foliar) {};
+	virtual void visit(HousePlant * _housePlant) {};
 	
-	virtual void visit(FloweringHouseplant &  _flowering) {};
-
+	virtual void visit(FoliarHousePlant * _housePlant) {};
 };
 
 #endif // !VISITOR_H

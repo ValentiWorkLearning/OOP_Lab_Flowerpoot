@@ -4,6 +4,7 @@
 #include "houseplant.hpp"
 #include "messages.hpp"
 #include "visitor.hpp"
+
 class FoliarHousePlant : public HousePlant 
 {
 public:
@@ -24,10 +25,11 @@ public:
 
 	int getCurrentHeight();
 
-	//void accept(FlowersVisitor & _visitor)override
-	//{
-	//	_visitor.visit(*this);
-	//};
+	void accept(FlowersVisitor & _visitor)override
+	{
+		//_visitor.visit(this);
+		m_visitor = &_visitor;
+	};
 
 private:
 
@@ -39,6 +41,8 @@ private:
 	
 	int m_height;
 	bool m_correctWatering;
+
+	FlowersVisitor * m_visitor;
 };
 
 #endif // !

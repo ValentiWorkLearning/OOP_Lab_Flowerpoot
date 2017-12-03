@@ -38,11 +38,6 @@ public:
 
 	void dayPassed( )override ;					// In father class increment the m_passedDays, in child  - actions to chek state flower
 
-	//void accept(FlowersVisitor & _visitor)override 
-	//{
-	//	_visitor.visit(*this);
-	//};
-	
 
 protected:
 		

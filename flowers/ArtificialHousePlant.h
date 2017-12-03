@@ -19,6 +19,8 @@ public :
 	void makeWatering() { throw std::logic_error(Messages::ArtificialError); }
 
 	int getPassedDays() { return HousePlant::getPassedDays(); };
+
+
 };
 
 ArtificialHousePlant::ArtificialHousePlant(const std::string & _name) : HousePlant(_name, 1,1)

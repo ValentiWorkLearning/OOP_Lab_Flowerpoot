@@ -1,9 +1,10 @@
 #include "foliarhouseplant.hpp"
+#include "gardener.hpp"
 
 
 FoliarHousePlant::FoliarHousePlant(const std::string & _namePlant, int _wateringPeriod, int _plantAge , int _mInitialHeight)
 	:
-	HousePlant(_namePlant, _wateringPeriod, _plantAge), m_height(_mInitialHeight), m_correctWatering(false)
+	HousePlant(_namePlant, _wateringPeriod, _plantAge), m_height(_mInitialHeight), m_correctWatering(false),m_visitor(nullptr)
 {
 	if (_mInitialHeight < 0)throw std::logic_error(Messages::IncorrectInitialHeight);
 }
@@ -16,9 +17,14 @@ void FoliarHousePlant::dayPassed()
 		m_height++;
 	}
 	
-	if (m_height == maxFlowerHeight) 
+	if (m_height == maxFlowerHeight && m_visitor !=nullptr ) 
 	{
 		m_height /=2 ;
+		std::string newName = getPlantName();
+		newName+="copy";
+		m_visitor->visit(new FoliarHousePlant(newName, getPlantWateringPeriod(), getPlantAge(), m_height));
+		
+		incrementWateringPeriod(2);
 	}
 }
 

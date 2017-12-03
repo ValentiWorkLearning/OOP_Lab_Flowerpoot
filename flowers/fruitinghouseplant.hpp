@@ -29,11 +29,6 @@ public:
 	
 	FlowerState getFruitingState();
 
-	void accept(FlowersVisitor & _visitor) override
-	{
-		_visitor.visit( * this );
-	};
-
 	void dayPassed()override;
 private:
 

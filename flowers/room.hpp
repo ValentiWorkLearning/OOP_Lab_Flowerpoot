@@ -6,9 +6,8 @@
 #include< string >
 
 #include "date.hpp"
-#include "floweringhouseplant.hpp"
 
-#include "messages.hpp"
+#include"houseplant.hpp"
 
 
 class Room 
@@ -32,7 +31,7 @@ public:
 
 	void pourAllPlants();
 
-	void passDays(int _days);
+	void passDays();
 
 	int flowersCount();
 private:

@@ -6,7 +6,8 @@
 #include "ArtificialHousePlant.h"
 #include "fruitinghouseplant.hpp"
 #include "foliarhouseplant.hpp"
-
+#include "gardener.hpp"
+#include "room.hpp"
 #include "messages.hpp"
 
 #include "testslib.hpp"
@@ -438,6 +439,44 @@ DECLARE_OOP_TEST(test_create_foliar_houseplant_make_waterings)
 	}
 	assert(m_kikus.getCurrentHeight() == (passedDays*makeWaterings - 1));
 
+}
+
+DECLARE_OOP_TEST(test_create_foliar_houseplant_make_waterings_2) 
+{
+	Room currentRoom;
+
+	Gardener currentGardener(currentRoom);
+	
+	FoliarHousePlant *foliarPlant =  new FoliarHousePlant("Kikus", 4, 0, 245);
+
+	foliarPlant->accept(currentGardener);
+	currentRoom.addPlant(foliarPlant);
+	
+	currentRoom.pourAllPlants();
+
+	currentRoom.passDays();
+	currentRoom.passDays();
+	currentRoom.passDays();
+	currentRoom.passDays();
+	currentRoom.pourAllPlants();
+
+	currentRoom.passDays();
+	currentRoom.passDays();
+	currentRoom.passDays();
+	currentRoom.passDays();
+	currentRoom.pourAllPlants();
+	currentRoom.passDays();
+	currentRoom.passDays();
+	currentRoom.passDays();
+	currentRoom.passDays();
+	currentRoom.pourAllPlants();
+	currentRoom.passDays();
+	currentRoom.passDays();
+	currentRoom.passDays();
+	currentRoom.passDays();
+	currentRoom.pourAllPlants();
+
+	//FoliarHousePlant m_kikus("Kikus", 4, 0, 4);
 }
 
 /*****************************************************************************/

@@ -23,12 +23,13 @@ void Room::pourAllPlants()
 	}
 }
 
-void Room::passDays(int _days)
+void Room::passDays()
 {
 	for (auto & item : m_plants) 
 	{
 		item.second->dayPassed();
 	}
+	m_currentData.addDay(1);
 }
 
 int Room::flowersCount()
