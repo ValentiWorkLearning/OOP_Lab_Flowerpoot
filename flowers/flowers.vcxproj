@@ -150,6 +150,7 @@
     <ClCompile Include="floweringhouseplant.cpp" />
     <ClCompile Include="foliarhouseplant.cpp" />
     <ClCompile Include="fruitinghouseplant.cpp" />
+    <ClCompile Include="gardener.cpp" />
     <ClCompile Include="houseplant.cpp" />
     <ClCompile Include="room.cpp" />
     <ClCompile Include="test.cpp" />
@@ -160,6 +161,7 @@
     <ClInclude Include="floweringhouseplant.hpp" />
     <ClInclude Include="foliarhouseplant.hpp" />
     <ClInclude Include="fruitinghouseplant.hpp" />
+    <ClInclude Include="gardener.hpp" />
     <ClInclude Include="houseplant.hpp" />
     <ClInclude Include="messages.hpp" />
     <ClInclude Include="room.hpp" />

@@ -5,7 +5,7 @@
 #include "date.hpp"
 #include "messages.hpp"
 
-class FlowersVisitor;
+class Visitor;
 class HousePlant 
 {
 
@@ -31,7 +31,7 @@ public:
 
 	virtual int getPassedDays() { return m_daysPassed;  }; // Return a num, of passed days
 
-	virtual void accept(FlowersVisitor &_visitor) {};
+	virtual void accept(Visitor &_visitor) {};
 private:
 
 	std::string m_plantName;

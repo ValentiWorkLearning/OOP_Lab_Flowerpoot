@@ -42,6 +42,9 @@
     <ClCompile Include="foliarhouseplant.cpp">
       <Filter>Model</Filter>
     </ClCompile>
+    <ClCompile Include="gardener.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="date.hpp">
@@ -72,6 +75,9 @@
       <Filter>Model</Filter>
     </ClInclude>
     <ClInclude Include="visitor.hpp">
+      <Filter>Room</Filter>
+    </ClInclude>
+    <ClInclude Include="gardener.hpp">
       <Filter>Room</Filter>
     </ClInclude>
   </ItemGroup>

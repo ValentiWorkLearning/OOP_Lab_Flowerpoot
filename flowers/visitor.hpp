@@ -4,15 +4,19 @@
 class HousePlant;
 class FoliarHousePlant;
 
-class FlowersVisitor 
+class Room;
+
+class Visitor 
 {
 public:
 
-	virtual ~FlowersVisitor() = default;
+	virtual ~Visitor() = default;
 	
 	virtual void visit(HousePlant * _housePlant) {};
 	
 	virtual void visit(FoliarHousePlant * _housePlant) {};
+
+	virtual void visit(Room * _room) {};
 };
 
 #endif // !VISITOR_H

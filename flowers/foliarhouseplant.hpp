@@ -25,24 +25,24 @@ public:
 
 	int getCurrentHeight();
 
-	void accept(FlowersVisitor & _visitor)override
+	void accept(Visitor & _visitor)override
 	{
-		//_visitor.visit(this);
-		m_visitor = &_visitor;
+		_visitor.visit(this);
+		//m_visitor = &_visitor;
 	};
-
+	FoliarHousePlant * cuttedFoliar();
 private:
 
 
 	bool logic_needWateringToday();
 	bool logic_isWateringCorrect();
-
+	
 	const int maxFlowerHeight = 250;
 	
 	int m_height;
 	bool m_correctWatering;
 
-	FlowersVisitor * m_visitor;
+	Visitor  * m_visitor;
 };
 
 #endif // !

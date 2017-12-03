@@ -7,10 +7,10 @@
 
 #include "date.hpp"
 
-#include"houseplant.hpp"
+#include"foliarhouseplant.hpp"
+#include"visitor.hpp"
 
-
-class Room 
+class Room
 {
 public:
 
@@ -34,6 +34,12 @@ public:
 	void passDays();
 
 	int flowersCount();
+
+	void visit(HousePlant * _housePlant);
+	//void accept(Visitor &_visitor) 
+	//{
+	//	_visitor.visit(this);
+	//};
 private:
 	
 	Date m_currentData;

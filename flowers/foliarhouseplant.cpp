@@ -17,15 +17,20 @@ void FoliarHousePlant::dayPassed()
 		m_height++;
 	}
 	
-	if (m_height == maxFlowerHeight && m_visitor !=nullptr ) 
-	{
-		m_height /=2 ;
-		std::string newName = getPlantName();
-		newName+="copy";
-		m_visitor->visit(new FoliarHousePlant(newName, getPlantWateringPeriod(), getPlantAge(), m_height));
-		
-		incrementWateringPeriod(2);
-	}
+	//if (m_height == maxFlowerHeight ) 
+	//{
+	//	m_height /=2 ;
+	//	std::string newName = getPlantName();
+	//	newName+="copy";
+	//	m_visitor->visit(new FoliarHousePlant(newName, getPlantWateringPeriod(), getPlantAge(), m_height));
+	//	//accept();
+	//	incrementWateringPeriod(2);
+	//}
+}
+
+FoliarHousePlant * FoliarHousePlant::cuttedFoliar()
+{
+	return nullptr;
 }
 
 int FoliarHousePlant::getPlantWateringPeriod() const

@@ -1,5 +1,5 @@
 #include "room.hpp"
-
+#include "gardener.hpp"
 void Room::addPlant(HousePlant * _plant)
 {
 	m_plants.insert({ _plant->getPlantName(),std::unique_ptr<HousePlant>(_plant) });
@@ -28,6 +28,7 @@ void Room::passDays()
 	for (auto & item : m_plants) 
 	{
 		item.second->dayPassed();
+		//item.second->accept();
 	}
 	m_currentData.addDay(1);
 }
@@ -35,6 +36,10 @@ void Room::passDays()
 int Room::flowersCount()
 {
 	return m_plants.size();
+}
+
+void Room::visit(FoliarHousePlant  * _housePlant)
+{
 }
 
 HousePlant * Room::findPlant(std::string const & _plantName)

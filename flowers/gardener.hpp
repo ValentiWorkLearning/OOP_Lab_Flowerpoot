@@ -7,7 +7,7 @@ class FoliarHousePlant;
 class HousePlant;
 class Room;
 
-class Gardener: public FlowersVisitor
+class Gardener: public Visitor
 {
 
 public:
@@ -15,6 +15,7 @@ public:
 
 	void visit(HousePlant *_houseplant)override;
 	void visit(FoliarHousePlant * _houseplant)override;
+	void Gardener::visit(Room * _room)override;
 private:
 	Room * m_room;
 };
