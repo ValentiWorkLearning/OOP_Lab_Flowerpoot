@@ -3,7 +3,7 @@
 
 #include "houseplant.hpp"
 #include "messages.hpp"
-
+#include "visitor.hpp"
 class FoliarHousePlant : public HousePlant 
 {
 public:
@@ -23,6 +23,11 @@ public:
 	int getPlantAge() const; 
 
 	int getCurrentHeight();
+
+	//void accept(FlowersVisitor & _visitor)override
+	//{
+	//	_visitor.visit(*this);
+	//};
 
 private:
 

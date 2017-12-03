@@ -3,7 +3,7 @@
 
 #include "houseplant.hpp"
 #include "messages.hpp"
-
+#include "visitor.hpp"
 class FloweringHouseplant : public HousePlant
 {
 public:
@@ -37,6 +37,12 @@ public:
 	int getPassedDays( ) override;			    // Return the passed days from father`s class
 
 	void dayPassed( )override ;					// In father class increment the m_passedDays, in child  - actions to chek state flower
+
+	//void accept(FlowersVisitor & _visitor)override 
+	//{
+	//	_visitor.visit(*this);
+	//};
+	
 
 protected:
 		
