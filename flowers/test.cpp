@@ -4,6 +4,7 @@
 
 #include "floweringhouseplant.hpp"
 #include "ArtificialHousePlant.h"
+#include "fruitinghouseplant.hpp"
 #include "messages.hpp"
 
 #include "testslib.hpp"
@@ -153,5 +154,54 @@ DECLARE_OOP_TEST(test_create_and_actions_in_artificial_houseplant)
 	ASSERT_THROWS(artificial.getPlantWateringPeriod(), Messages::ArtificialError);
 
 }
+
+DECLARE_OOP_TEST(test_fruiting_house_plant) 
+{
+	FruitingHousePlant m_fruit("Lemon tree", "Lemon",0,2,2,2,4);
+	assert(m_fruit.getFruitName() == "Lemon");
+	assert(m_fruit.getPlantName() == "Lemon tree");
+	assert(m_fruit.getFruitingTime() == 4);
+}
+
+DECLARE_OOP_TEST(test_fruiting_house_plant_with_empty_fruit_name)
+{
+	ASSERT_THROWS(FruitingHousePlant("Lemon tree", "", 0, 1, 2, 3, 4),Messages::EmptyFruitName);
+}
+
+DECLARE_OOP_TEST(test_fruiting_house_plant_with_invalid_fruiting_period)
+{
+	ASSERT_THROWS(FruitingHousePlant("Lemon tree", "orange", 0, 1, 2, 3, -4), Messages::IncorrectFruitingPeriod);
+}
+
+DECLARE_OOP_TEST(test_fruititng_houseplant_correct_fruiting) 
+{
+	FruitingHousePlant m_fruit("Lemon tree", "Lemon", 0, 2, 2, 2, 5);
+
+	int prevWateringPeriod = m_fruit.getPlantWateringPeriod();
+
+	for (int i = 0; i < 3; i++) 
+	{
+		for (int j = 0; j < 2; j++) 
+		{
+			m_fruit.dayPassed();
+		}
+		m_fruit.makeWatering();
+	}
+
+	m_fruit.dayPassed();
+	m_fruit.dayPassed();
+	//In fruiting state now
+	assert(m_fruit.getFlowerStatus() == FloweringHouseplant::FlowerState::Fruiting);
+	
+	m_fruit.makeWatering();
+	m_fruit.dayPassed();
+	m_fruit.dayPassed();
+
+	m_fruit.makeWatering();
+	m_fruit.dayPassed();
+	assert(m_fruit.getFlowerStatus() == FloweringHouseplant::FlowerState::Growing);
+	assert(m_fruit.getPlantWateringPeriod() == (prevWateringPeriod += 2));
+}
+
 /*****************************************************************************/
 
