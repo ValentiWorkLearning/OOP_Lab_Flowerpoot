@@ -44,21 +44,21 @@ protected:
 
 	bool logic_isEndOfFlowering( );			    // Is end of flowering -  doing actions
 
-	bool logic_isWateringAtTime();				//Is waterinng AT TIME, not after or before 1 day
-
-	bool logic_isWateringBeforeAfter1Day();	
-
 	bool logic_needWateringToday();
 
-	void logic_independentWatering(bool _setUpFlag, FlowerState _triggeredState);
+	void logic_independentWatering(bool & _setUpFlag, FlowerState _triggeredState);
 
 	void logic_setFlowerState(FlowerState  _flowerState);
 	
 	void logic_passedDay();
-
-	int m_nDaysInFloweringState;				// Value of days in flowering state
-
+	
+	void logic_resetDaysInFloweringState();
 private:
+
+
+	bool logic_isWateringAtTime();				//Is waterinng AT TIME, not after or before 1 day
+
+	bool logic_isWateringBeforeAfter1Day();
 
 	const int m_floweringTime;					// Flowering time of plant
 	
@@ -66,7 +66,7 @@ private:
 
 	int m_currentWaterings;						// Current value of succesful waterings 
 	
-	
+	int m_nDaysInFloweringState;				// Value of days in flowering state
 
 	bool m_isCorrectWateringInFlowering;		// Is correct watering in flowering state?
 

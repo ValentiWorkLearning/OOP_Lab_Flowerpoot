@@ -127,7 +127,7 @@ bool FloweringHouseplant::logic_needWateringToday()
 	return ( lastWatering.dayDifference(currentDate) > getPlantWateringPeriod()+1) ? true:false;
 }
 
-void FloweringHouseplant::logic_independentWatering(bool _setUpFlag, FlowerState _triggeredState)
+void FloweringHouseplant::logic_independentWatering(bool & _setUpFlag, FlowerState _triggeredState)
 {
 
 	if (logic_isWateringAtTime())
@@ -188,6 +188,11 @@ void FloweringHouseplant::logic_passedDay()
 			logic_resetWateringPeriod();
 		}
 	}
+}
+
+void FloweringHouseplant::logic_resetDaysInFloweringState()
+{
+	m_nDaysInFloweringState = 0;
 }
 
 
