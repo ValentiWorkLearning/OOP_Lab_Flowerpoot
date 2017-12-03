@@ -1,9 +1,8 @@
 #include "room.hpp"
 
-void Room::addFloweringPlant(std::string const & _plantName, int _plantAge, int _wateringPeriod, int _needdedSuccesfulFlowerings, int _floweringTime)
+void Room::addPlant(HousePlant * _plant)
 {
-	m_plants.insert({ _plantName,std::make_unique<FloweringHouseplant>(_plantName,_plantAge,_wateringPeriod,
-		_needdedSuccesfulFlowerings, _floweringTime)  } ) ;
+	m_plants.insert({ _plant->getPlantName(),std::unique_ptr<HousePlant>(_plant) });
 }
 
 int Room::getFlowerAge(std::string const & _plantName)
@@ -14,6 +13,27 @@ int Room::getFlowerAge(std::string const & _plantName)
 void Room::pourOnFlower(std::string const & _plantName)
 {
 	findPlant(_plantName)->makeWatering();
+}
+
+void Room::pourAllPlants()
+{
+	for (auto & item  : m_plants) 
+	{
+		item.second->makeWatering();
+	}
+}
+
+void Room::passDays(int _days)
+{
+	for (auto & item : m_plants) 
+	{
+		item.second->dayPassed();
+	}
+}
+
+int Room::flowersCount()
+{
+	return m_plants.size();
 }
 
 HousePlant * Room::findPlant(std::string const & _plantName)

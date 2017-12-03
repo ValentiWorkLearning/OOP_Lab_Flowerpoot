@@ -24,14 +24,17 @@ public:
 	~Room() = default;
 
 
-	void addFloweringPlant(std::string const & _plantName, int _plantAge, int _irregationPeriod , int _needdedSuccesfulFlowerings, int _floweringTime);
+	void addPlant(HousePlant * _plant);
 	
 	int  getFlowerAge(std::string const & _plantName);
 
 	void pourOnFlower(std::string const & _plantName);
 
-	void waitDays(int _days);
+	void pourAllPlants();
 
+	void passDays(int _days);
+
+	int flowersCount();
 private:
 	
 	Date m_currentData;
