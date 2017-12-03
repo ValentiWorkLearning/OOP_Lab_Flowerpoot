@@ -91,8 +91,8 @@ bool FloweringHouseplant::logic_isEndOfFlowering()
 
 	if (getFloweringTime() == m_nDaysInFloweringState) 
 	{
-		std::cout << "Congratulation! Your plant name:" << getPlantName() << " has succesfully completed the flowering" << std::endl;
-		return true;
+		std::cout << std::endl<<"Congratulation! Your plant name:" << getPlantName() << " has succesfully completed the flowering" << std::endl;
+		return true; 
 	}
 	return false;
 }
