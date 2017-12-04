@@ -7,7 +7,7 @@
 
 #include "date.hpp"
 
-#include"foliarhouseplant.hpp"
+#include"houseplant.hpp"
 #include"visitor.hpp"
 
 class Room

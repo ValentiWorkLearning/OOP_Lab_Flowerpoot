@@ -5,7 +5,7 @@
 #include "date.hpp"
 #include "messages.hpp"
 
-class Visitor;
+
 class HousePlant 
 {
 
