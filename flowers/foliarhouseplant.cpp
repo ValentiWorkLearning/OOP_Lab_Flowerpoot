@@ -2,11 +2,12 @@
 #include "gardener.hpp"
 
 
-FoliarHousePlant::FoliarHousePlant(const std::string & _namePlant, int _wateringPeriod, int _plantAge , int _mInitialHeight)
+FoliarHousePlant::FoliarHousePlant(const std::string & _namePlant, int _wateringPeriod, int _plantAge , int _mInitialHeight, Gardener & _gardener)
 	:
-	HousePlant(_namePlant, _wateringPeriod, _plantAge), m_height(_mInitialHeight), m_correctWatering(false),m_visitor(nullptr)
+	HousePlant(_namePlant, _wateringPeriod, _plantAge), m_height(_mInitialHeight), m_correctWatering(false),m_gardener(_gardener)
 {
 	if (_mInitialHeight < 0)throw std::logic_error(Messages::IncorrectInitialHeight);
+	
 }
 
 void FoliarHousePlant::dayPassed()
@@ -17,20 +18,14 @@ void FoliarHousePlant::dayPassed()
 		m_height++;
 	}
 	
-	//if (m_height == maxFlowerHeight ) 
-	//{
-	//	m_height /=2 ;
-	//	std::string newName = getPlantName();
-	//	newName+="copy";
-	//	m_visitor->visit(new FoliarHousePlant(newName, getPlantWateringPeriod(), getPlantAge(), m_height));
-	//	//accept();
-	//	incrementWateringPeriod(2);
-	//}
-}
-
-FoliarHousePlant * FoliarHousePlant::cuttedFoliar()
-{
-	return nullptr;
+	if (m_height == maxFlowerHeight ) 
+	{
+		m_height /=2 ;
+		std::string newName = getPlantName();
+		newName+="copy";
+		m_gardener.timeToPlantOut (new FoliarHousePlant(newName, getPlantWateringPeriod(), getPlantAge(), m_height , m_gardener));
+		incrementWateringPeriod(2);
+	}
 }
 
 int FoliarHousePlant::getPlantWateringPeriod() const

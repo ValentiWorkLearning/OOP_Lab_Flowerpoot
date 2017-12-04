@@ -35,11 +35,6 @@ public:
 
 	int flowersCount();
 
-	void visit(HousePlant * _housePlant);
-	//void accept(Visitor &_visitor) 
-	//{
-	//	_visitor.visit(this);
-	//};
 private:
 	
 	Date m_currentData;

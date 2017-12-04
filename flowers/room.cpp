@@ -28,7 +28,6 @@ void Room::passDays()
 	for (auto & item : m_plants) 
 	{
 		item.second->dayPassed();
-		//item.second->accept();
 	}
 	m_currentData.addDay(1);
 }
@@ -36,10 +35,6 @@ void Room::passDays()
 int Room::flowersCount()
 {
 	return m_plants.size();
-}
-
-void Room::visit(FoliarHousePlant  * _housePlant)
-{
 }
 
 HousePlant * Room::findPlant(std::string const & _plantName)

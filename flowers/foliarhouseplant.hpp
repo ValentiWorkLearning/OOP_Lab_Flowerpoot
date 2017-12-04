@@ -3,8 +3,9 @@
 
 #include "houseplant.hpp"
 #include "messages.hpp"
-#include "visitor.hpp"
+#include "gardener.hpp"
 
+class Gardener;
 class FoliarHousePlant : public HousePlant 
 {
 public:
@@ -12,7 +13,8 @@ public:
 		const std::string & _namePlant,
 		int _wateringPeriod,
 		int _plantAge,
-		int _mInitialHeight
+		int _mInitialHeight,
+		Gardener & _gardener
 	);
 	
 	void dayPassed()override;
@@ -25,12 +27,6 @@ public:
 
 	int getCurrentHeight();
 
-	void accept(Visitor & _visitor)override
-	{
-		_visitor.visit(this);
-		//m_visitor = &_visitor;
-	};
-	FoliarHousePlant * cuttedFoliar();
 private:
 
 
@@ -42,7 +38,7 @@ private:
 	int m_height;
 	bool m_correctWatering;
 
-	Visitor  * m_visitor;
+	Gardener  & m_gardener;
 };
 
 #endif // !

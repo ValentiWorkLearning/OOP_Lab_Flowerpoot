@@ -10,13 +10,13 @@ public :
 
 	void dayPassed() override;
 
-	int getPlantWateringPeriod() const { throw std::logic_error(Messages::ArtificialError); }; //Get plant watering period
+	int getPlantWateringPeriod() const { throw std::logic_error(Messages::ArtificialError_TryToGetWateringPeriod); };
 
-	const Date & getDateOfLastWatering()   { throw std::logic_error(Messages::ArtificialError); } 
+	const Date & getDateOfLastWatering()   { throw std::logic_error(Messages::ArtificialError_TryToGetLastWatering); }
 
-	void setDateOfLastWatering(Date _date) { throw std::logic_error(Messages::ArtificialError); }
+	void setDateOfLastWatering(Date _date) { throw std::logic_error(Messages::ArtificialError_TryToSetLastWatering); }
 
-	void makeWatering() { throw std::logic_error(Messages::ArtificialError); }
+	void makeWatering() { throw std::logic_error(Messages::ArtificialError_TryToMakeWatering); }
 
 	int getPassedDays() { return HousePlant::getPassedDays(); };
 

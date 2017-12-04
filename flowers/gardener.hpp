@@ -2,20 +2,20 @@
 #define GARDENER_H
 
 #include  "visitor.hpp"
+#include "room.hpp"
+#include "foliarhouseplant.hpp"
 
 class FoliarHousePlant;
-class HousePlant;
 class Room;
 
 class Gardener: public Visitor
 {
 
 public:
-	Gardener(Room & _room);
+	Gardener( Room & _room);
 
-	void visit(HousePlant *_houseplant)override;
-	void visit(FoliarHousePlant * _houseplant)override;
-	void Gardener::visit(Room * _room)override;
+	void timeToPlantOut(FoliarHousePlant * _housePlant)override;
+
 private:
 	Room * m_room;
 };

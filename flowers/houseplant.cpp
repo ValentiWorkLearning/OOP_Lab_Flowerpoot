@@ -32,10 +32,6 @@ void HousePlant::incrementWateringPeriod( int _inc)
 	m_wateringPeriod+=_inc;
 }
 
-void HousePlant::addDay(int _nDays)
-{
-	m_dateOfLastWatering.addDay(_nDays);
-}
 
 //Getters methods
 const std::string & HousePlant::getPlantName()
@@ -45,7 +41,11 @@ const std::string & HousePlant::getPlantName()
 
 int  HousePlant::getPlantAge()const
 {
-	return m_plantAge;
+	Date _currentDate;
+
+	_currentDate.addDay(m_daysPassed);
+
+	return _currentDate.yearDifference(Date());
 }
 
 int HousePlant::getPlantWateringPeriod() const
@@ -62,4 +62,9 @@ void HousePlant::setDateOfLastWatering(Date _date)
 {
 	_date.addDay(getPassedDays());
 	m_dateOfLastWatering = _date;
+}
+
+void HousePlant::dayPassed()
+{
+	 m_daysPassed++;
 }

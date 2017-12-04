@@ -214,10 +214,10 @@ DECLARE_OOP_TEST(test_create_and_actions_in_artificial_houseplant)
 {
 	ArtificialHousePlant artificial("Decor Element");
 
-	ASSERT_THROWS(artificial.getDateOfLastWatering(), Messages::ArtificialError);
-	ASSERT_THROWS(artificial.setDateOfLastWatering(Date()), Messages::ArtificialError);
-	ASSERT_THROWS(artificial.makeWatering(), Messages::ArtificialError);
-	ASSERT_THROWS(artificial.getPlantWateringPeriod(), Messages::ArtificialError);
+	ASSERT_THROWS(artificial.getDateOfLastWatering(), Messages::ArtificialError_TryToGetLastWatering);
+	ASSERT_THROWS(artificial.setDateOfLastWatering(Date()), Messages::ArtificialError_TryToSetLastWatering);
+	ASSERT_THROWS(artificial.makeWatering(), Messages::ArtificialError_TryToMakeWatering);
+	ASSERT_THROWS(artificial.getPlantWateringPeriod(), Messages::ArtificialError_TryToGetWateringPeriod);
 
 }
 
@@ -408,7 +408,9 @@ DECLARE_OOP_TEST(test_fruititng_houseplant__invariants_test_5)
 
 DECLARE_OOP_TEST(test_create_foliar_houseplant) 
 {
-	FoliarHousePlant m_kikus("Kikus", 4, 0, 4);
+	Room currentRoom;
+	Gardener gardener(currentRoom);
+	FoliarHousePlant m_kikus("Kikus", 4, 0, 4, gardener);
 
 	assert(m_kikus.getPlantName() == "Kikus");
 	assert(m_kikus.getCurrentHeight() == 4);
@@ -417,12 +419,16 @@ DECLARE_OOP_TEST(test_create_foliar_houseplant)
 
 DECLARE_OOP_TEST(test_create_foliar_houseplant_invalid_initial_height)
 {
-	ASSERT_THROWS(FoliarHousePlant ("Kikus", 4, 0, -49) , Messages::IncorrectInitialHeight);	
+	Room currentRoom;
+	Gardener gardener(currentRoom);
+	ASSERT_THROWS(FoliarHousePlant ("Kikus", 4, 0, -49, gardener) , Messages::IncorrectInitialHeight);
 }
 
 DECLARE_OOP_TEST(test_create_foliar_houseplant_make_waterings)
 {
-	FoliarHousePlant m_kikus("Kikus", 4, 0, 4);
+	Room currentRoom;
+	Gardener gardener(currentRoom);
+	FoliarHousePlant m_kikus("Kikus", 4, 0, 4,gardener);
 	
 	int currentHeight = m_kikus.getCurrentHeight();
 	
@@ -447,23 +453,27 @@ DECLARE_OOP_TEST(test_create_foliar_houseplant_make_waterings_2)
 
 	Gardener currentGardener(currentRoom);
 	
-	FoliarHousePlant *foliarPlant =  new FoliarHousePlant("Kikus", 4, 0, 245);
+	FoliarHousePlant *foliarPlant =  new FoliarHousePlant("Kikus", 4, 0, 245, currentGardener);
 
 	currentRoom.addPlant(foliarPlant);
 	
-	currentRoom.accept(currentGardener);
-	//currentRoom.pourAllPlants();
+	for (int i = 0; i < 2; i++) 
+	{
+		for (int j = 0; j < 4; j++) 
+		{
+			currentRoom.passDays();
+		}
+		currentRoom.pourAllPlants();
+	}
+	assert(foliarPlant->getCurrentHeight() ==  249);
 
-
-
-	//currentRoom.passDays();
-	//currentRoom.passDays();
-	//currentRoom.passDays();
-	//currentRoom.passDays();
-	//currentRoom.pourAllPlants();
-
-
-	//FoliarHousePlant m_kikus("Kikus", 4, 0, 4);
+	currentRoom.passDays();
+	
+	assert(currentRoom.flowersCount() == 2);
+	currentRoom.passDays();
+	currentRoom.passDays();
+	currentRoom.passDays();
+	currentRoom.pourAllPlants();
 }
 
 /*****************************************************************************/

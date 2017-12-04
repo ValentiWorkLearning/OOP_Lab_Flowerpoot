@@ -27,11 +27,10 @@ public:
 
 	virtual void makeWatering() {}; // Virtual method - make watering of plant
 	
-	virtual void dayPassed() { m_daysPassed++; }; // Update plant 
+	virtual void dayPassed(); // Update plant 
 
 	virtual int getPassedDays() { return m_daysPassed;  }; // Return a num, of passed days
 
-	virtual void accept(Visitor &_visitor) {};
 private:
 
 	std::string m_plantName;
@@ -51,7 +50,6 @@ protected:
 		int _plantAge );
 
 	void incrementWateringPeriod( int _inc);
-	void addDay(int _nDays);
 };
 
 
