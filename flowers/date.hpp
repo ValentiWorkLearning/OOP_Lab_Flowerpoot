@@ -38,6 +38,7 @@ public:
 
 	void addDay(int _nDay);
 	int  dayDifference(Date & _d2);
+	int	 yearDifference(Date & _d2);
 	/*-----------------------------------------------------------------*/
 
 private:
